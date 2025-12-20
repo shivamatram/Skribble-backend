@@ -686,7 +686,10 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // 3. Broadcast ROOM_STATUS_UPDATE with current player list
         logger.info("QUICK_PLAY: About to broadcast ROOM_STATUS_UPDATE for room {}", roomId);
         try {
-            broadcastRoomStatusUpdate(room);
+            String roomStatusUpdateMsg = createRoomStatusUpdateMessage(room);
+            broadcastToRoom(roomId, roomStatusUpdateMsg);
+            // Also send directly to the current player (since they just joined and broadcast might not reach them)
+            sendMessage(session, roomStatusUpdateMsg);
             logger.info("QUICK_PLAY: Successfully broadcast ROOM_STATUS_UPDATE for room {}", roomId);
         } catch (Exception e) {
             logger.error("QUICK_PLAY: Failed to broadcast ROOM_STATUS_UPDATE", e);
@@ -702,6 +705,14 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private void broadcastRoomStatusUpdate(RoomState room) {
         logger.debug("Broadcasting ROOM_STATUS_UPDATE for room {} with {} players", 
                 room.getRoomId(), room.getPlayerCount());
+        String roomStatusUpdateMsg = createRoomStatusUpdateMessage(room);
+        broadcastToRoom(room.getRoomId(), roomStatusUpdateMsg);
+    }
+
+    /**
+     * Create ROOM_STATUS_UPDATE message JSON for a room.
+     */
+    private String createRoomStatusUpdateMessage(RoomState room) {
         List<RoomStatusUpdateBroadcast.PlayerInfo> players = new ArrayList<>();
         String currentDrawerId = room.getCurrentDrawerId();
         
@@ -724,7 +735,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         statusUpdate.setRoundNumber(room.getCurrentRound());
         statusUpdate.setTotalRounds(room.getTotalRounds());
         
-        broadcastToRoom(room.getRoomId(), toJson(statusUpdate));
+        return toJson(statusUpdate);
     }
 
     /**
