@@ -19,9 +19,13 @@ import com.skribble.dto.RoomAssignedEvent;
 import com.skribble.dto.RoomStatusUpdateBroadcast;
 import com.skribble.dto.RoundEndedBroadcast;
 import com.skribble.dto.ScoreUpdateBroadcast;
+import com.skribble.dto.SendWordOptionsEvent;
 import com.skribble.dto.StateSyncEvent;
 import com.skribble.dto.StrokeBroadcast;
 import com.skribble.dto.SubmitGuessMessage;
+import com.skribble.dto.WordConfirmedBroadcast;
+import com.skribble.dto.WordSelectedMessage;
+import com.skribble.dto.WordSelectionStartedBroadcast;
 import com.skribble.performance.ConnectionLimiter;
 import com.skribble.performance.PerformanceMonitor;
 import com.skribble.performance.StrokeBatcher;
@@ -35,6 +39,9 @@ import com.skribble.security.AbuseTracker;
 import com.skribble.security.RateLimiter;
 import com.skribble.security.SecurityValidator;
 import com.skribble.session.SessionManager;
+import com.skribble.word.WordSelectionManager;
+import com.skribble.word.WordSelectionResult;
+import com.skribble.word.WordSelectionSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -79,6 +86,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private final PerformanceMonitor performanceMonitor;
     private final ConnectionLimiter connectionLimiter;
     private final StrokeBatcher strokeBatcher;
+    private final WordSelectionManager wordSelectionManager;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
     
     // Track player info associated with each session
@@ -100,7 +108,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                                  RateLimiter rateLimiter, AbuseTracker abuseTracker,
                                  PerformanceMonitor performanceMonitor,
                                  ConnectionLimiter connectionLimiter,
-                                 StrokeBatcher strokeBatcher) {
+                                 StrokeBatcher strokeBatcher,
+                                 WordSelectionManager wordSelectionManager) {
         this.objectMapper = objectMapper;
         this.sessionManager = sessionManager;
         this.roomManager = roomManager;
@@ -112,6 +121,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         this.performanceMonitor = performanceMonitor;
         this.connectionLimiter = connectionLimiter;
         this.strokeBatcher = strokeBatcher;
+        this.wordSelectionManager = wordSelectionManager;
     }
 
     @PostConstruct
@@ -415,6 +425,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 break;
             case "SUBMIT_GUESS":
                 handleSubmitGuess(session, payload);
+                break;
+            case "WORD_SELECTED":
+                handleWordSelected(session, payload);
                 break;
             case "CHAT":
                 handleChat(session, payload);
@@ -767,7 +780,6 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             return;
         }
         
-        room.setStatus(RoomStatus.IN_PROGRESS);
         room.setGameInProgress(true);
         room.setCurrentRound(1);
         room.setGameStartTime(System.currentTimeMillis());
@@ -775,27 +787,324 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Initialize correct guesses tracking for this room
         playerCorrectGuesses.put(roomId, new ConcurrentHashMap<>());
         
-        // TODO: Select first drawer and word
-        // For now, just broadcast that game started
-        broadcastRoomStatusUpdate(room);
+        // Select first drawer and start word selection
+        selectNextDrawerAndStartWordSelection(room);
+        
         logger.info("Game started: roomId={}, playerCount={}", roomId, room.getPlayerCount());
+    }
+
+    /**
+     * Select the next drawer and start word selection phase.
+     */
+    private void selectNextDrawerAndStartWordSelection(RoomState room) {
+        String roomId = room.getRoomId();
+        
+        // Get next drawer from player list (round-robin)
+        List<String> players = new ArrayList<>(room.getPlayerIds());
+        if (players.isEmpty()) {
+            logger.warn("No players available to draw: roomId={}", roomId);
+            return;
+        }
+        
+        // Simple round-robin: use (round - 1) % playerCount
+        int drawerIndex = (room.getCurrentRound() - 1) % players.size();
+        String drawerId = players.get(drawerIndex);
+        String drawerName = room.getPlayerName(drawerId);
+        
+        room.setCurrentDrawerId(drawerId);
+        room.setStatus(RoomStatus.WORD_SELECTION);
+        
+        logger.info("Drawer selected: roomId={}, round={}, drawerId={}, drawerName={}", 
+                roomId, room.getCurrentRound(), drawerId, drawerName);
+        
+        // Start word selection phase
+        WordSelectionSession session = wordSelectionManager.startWordSelection(
+                roomId, 
+                drawerId,
+                this::handleWordSelectionTimeout
+        );
+        
+        // Send WORD_SELECTION_STARTED to all guessers
+        WordSelectionStartedBroadcast selectionStarted = WordSelectionStartedBroadcast.create(
+                roomId, 
+                drawerId, 
+                drawerName,
+                WordSelectionManager.SELECTION_TIMEOUT_SECONDS,
+                room.getCurrentRound()
+        );
+        broadcastToRoomExcept(roomId, toJson(selectionStarted), drawerId);
+        
+        // Send SEND_WORD_OPTIONS only to the drawer (SECURITY CRITICAL)
+        SendWordOptionsEvent wordOptions = SendWordOptionsEvent.create(
+                roomId,
+                session.getWordOptions(),
+                WordSelectionManager.SELECTION_TIMEOUT_SECONDS
+        );
+        sendToPlayer(drawerId, toJson(wordOptions));
+        
+        logger.info("Word selection started: roomId={}, drawerId={}, optionsCount={}", 
+                roomId, drawerId, session.getWordOptions().size());
+        
+        // Broadcast room status update
+        broadcastRoomStatusUpdate(room);
+    }
+
+    /**
+     * Handle word selection timeout - auto-select word and start drawing phase.
+     */
+    private void handleWordSelectionTimeout(String roomId, String drawerId, String selectedWord, boolean autoSelected) {
+        logger.info("Word selection timeout handler: roomId={}, drawerId={}, autoSelected={}", 
+                roomId, drawerId, autoSelected);
+        
+        Optional<RoomState> roomOpt = roomManager.getRoom(roomId);
+        if (roomOpt.isEmpty()) {
+            logger.warn("Room not found for word selection timeout: roomId={}", roomId);
+            return;
+        }
+        
+        RoomState room = roomOpt.get();
+        
+        // Verify we're still in word selection phase
+        if (room.getStatus() != RoomStatus.WORD_SELECTION) {
+            logger.debug("Room not in word selection phase: roomId={}, status={}", roomId, room.getStatus());
+            return;
+        }
+        
+        // Start drawing phase with auto-selected word
+        startDrawingPhase(room, selectedWord, autoSelected);
+    }
+
+    /**
+     * Handle WORD_SELECTED message from drawer.
+     */
+    private void handleWordSelected(WebSocketSession session, JsonNode payload) {
+        String sessionId = session.getId();
+        
+        // Parse the message
+        WordSelectedMessage message;
+        try {
+            message = objectMapper.treeToValue(payload, WordSelectedMessage.class);
+        } catch (JsonProcessingException e) {
+            logger.warn("Failed to parse WORD_SELECTED message: sessionId={}, error={}", sessionId, e.getMessage());
+            sendError(session, "INVALID_PAYLOAD", "Invalid WORD_SELECTED format");
+            return;
+        }
+        
+        // Validate required fields
+        if (!message.isValid()) {
+            sendError(session, "INVALID_PAYLOAD", "WORD_SELECTED requires: roomId, playerId, selectedWord");
+            return;
+        }
+        
+        String roomId = message.getRoomId();
+        String playerId = message.getPlayerId();
+        String selectedWord = message.getSelectedWord();
+        
+        // Get room state
+        Optional<RoomState> roomOpt = roomManager.getRoom(roomId);
+        if (roomOpt.isEmpty()) {
+            sendError(session, "ROOM_NOT_FOUND", "Room does not exist");
+            return;
+        }
+        RoomState room = roomOpt.get();
+        
+        // Verify room is in word selection phase
+        if (room.getStatus() != RoomStatus.WORD_SELECTION) {
+            logger.warn("Word selection attempted outside word selection phase: roomId={}, status={}", 
+                    roomId, room.getStatus());
+            sendError(session, "INVALID_PHASE", "Word selection is not active");
+            return;
+        }
+        
+        // Process word selection through manager (validates drawer, word option, etc.)
+        WordSelectionResult result = wordSelectionManager.selectWord(roomId, playerId, selectedWord);
+        
+        if (!result.isSuccess()) {
+            logger.warn("Word selection rejected: roomId={}, playerId={}, error={}", 
+                    roomId, playerId, result.getErrorCode());
+            
+            // Log suspicious attempts
+            if ("NOT_DRAWER".equals(result.getErrorCode()) || "INVALID_WORD".equals(result.getErrorCode())) {
+                abuseTracker.recordViolation(playerId, AbuseTracker.ViolationType.INVALID_ACTION);
+                logger.warn("SECURITY: Suspicious word selection attempt: roomId={}, playerId={}, error={}", 
+                        roomId, playerId, result.getErrorCode());
+            }
+            
+            sendError(session, result.getErrorCode(), result.getErrorMessage());
+            return;
+        }
+        
+        logger.info("Word selected by drawer: roomId={}, drawerId={}", roomId, playerId);
+        
+        // Start drawing phase
+        startDrawingPhase(room, result.getSelectedWord(), false);
+    }
+
+    /**
+     * Start the drawing phase after word is selected.
+     */
+    private void startDrawingPhase(RoomState room, String selectedWord, boolean autoSelected) {
+        String roomId = room.getRoomId();
+        String drawerId = room.getCurrentDrawerId();
+        String drawerName = room.getPlayerName(drawerId);
+        
+        // Store selected word in room state (secure - not exposed to clients)
+        room.setCurrentWord(selectedWord);
+        room.setStatus(RoomStatus.DRAWING);
+        room.startRound(room.getRoundDurationMs());
+        
+        // Create word hint for guessers (e.g., "_ _ _ _ _")
+        String wordHint = createWordHint(selectedWord);
+        int wordLength = selectedWord.length();
+        
+        // Send WORD_CONFIRMED to drawer (with actual word)
+        WordConfirmedBroadcast drawerConfirmation = WordConfirmedBroadcast.createForDrawer(
+                roomId, drawerId, drawerName, selectedWord
+        );
+        sendToPlayer(drawerId, toJson(drawerConfirmation));
+        
+        // Send WORD_CONFIRMED to guessers (with hint only)
+        WordConfirmedBroadcast guesserConfirmation = WordConfirmedBroadcast.createForGuessers(
+                roomId, drawerId, drawerName, wordHint, wordLength
+        );
+        broadcastToRoomExcept(roomId, toJson(guesserConfirmation), drawerId);
+        
+        // Broadcast room status update
+        broadcastRoomStatusUpdate(room);
+        
+        logger.info("Drawing phase started: roomId={}, round={}, drawerId={}, wordLength={}, autoSelected={}", 
+                roomId, room.getCurrentRound(), drawerId, wordLength, autoSelected);
+        
+        // Schedule round timeout
+        scheduleRoundTimeout(room);
+    }
+
+    /**
+     * Schedule round timeout to end round when time expires.
+     */
+    private void scheduleRoundTimeout(RoomState room) {
+        String roomId = room.getRoomId();
+        long roundDurationMs = room.getRoundDurationMs();
+        
+        scheduler.schedule(() -> {
+            Optional<RoomState> roomOpt = roomManager.getRoom(roomId);
+            if (roomOpt.isEmpty()) {
+                return;
+            }
+            
+            RoomState currentRoom = roomOpt.get();
+            
+            // Check if round is still in progress
+            if (currentRoom.getStatus() == RoomStatus.DRAWING && currentRoom.isRoundTimeExpired()) {
+                logger.info("Round time expired: roomId={}, round={}", roomId, currentRoom.getCurrentRound());
+                endRound(currentRoom, "time_expired");
+            }
+        }, roundDurationMs + 500, TimeUnit.MILLISECONDS);
+    }
+
+    /**
+     * Send message to a specific player by ID.
+     */
+    private void sendToPlayer(String playerId, String message) {
+        Optional<String> sessionIdOpt = sessionManager.findSessionByPlayerId(playerId);
+        if (sessionIdOpt.isPresent()) {
+            sessionManager.sendToSession(sessionIdOpt.get(), message);
+        } else {
+            logger.warn("Cannot send to player - session not found: playerId={}", playerId);
+        }
+    }
+
+    /**
+     * Broadcast to room except one player.
+     */
+    private void broadcastToRoomExcept(String roomId, String message, String excludePlayerId) {
+        Collection<String> playerIds = roomManager.getPlayersInRoom(roomId);
+        int sentCount = 0;
+        
+        for (String playerId : playerIds) {
+            if (playerId.equals(excludePlayerId)) {
+                continue;
+            }
+            Optional<String> targetSessionId = sessionManager.findSessionByPlayerId(playerId);
+            if (targetSessionId.isPresent()) {
+                if (sessionManager.sendToSession(targetSessionId.get(), message)) {
+                    sentCount++;
+                }
+            }
+        }
+        
+        logger.debug("Broadcast to room (except {}): roomId={}, sentCount={}", excludePlayerId, roomId, sentCount);
     }
 
     private void handleJoinRoom(WebSocketSession session, JsonNode payload) {
         String roomCode = getStringField(payload, "roomCode");
         String playerName = getStringField(payload, "playerName");
+        String playerId = getStringField(payload, "playerId");
         
         if (roomCode == null || playerName == null) {
             sendError(session, "INVALID_PAYLOAD", "JOIN_ROOM requires 'roomCode' and 'playerName'");
             return;
         }
         
-        logger.info("Player joining room: sessionId={}, roomCode={}, playerName={}", 
-                session.getId(), roomCode, playerName);
+        logger.info("Player joining room: sessionId={}, roomCode={}, playerName={}, playerId={}", 
+                session.getId(), roomCode, playerName, playerId);
         
-        // TODO: Implement room joining logic via RoomManager
-        // For now, just acknowledge
+        // Send ACK immediately
         sendMessage(session, createAckMessage("JOIN_ROOM", "Room join request received"));
+        
+        // Check if room exists
+        if (!roomManager.roomExists(roomCode)) {
+            sendError(session, "ROOM_NOT_FOUND", "Room '" + roomCode + "' does not exist");
+            return;
+        }
+        
+        // Get the room
+        RoomState room = roomManager.getRoomById(roomCode).orElse(null);
+        if (room == null) {
+            sendError(session, "ROOM_NOT_FOUND", "Room '" + roomCode + "' not found");
+            return;
+        }
+        
+        // Check if room is joinable
+        if (!room.isJoinable()) {
+            sendError(session, "ROOM_FULL", "Room is full or not accepting players");
+            return;
+        }
+        
+        // Use provided playerId or generate one
+        if (playerId == null || playerId.isEmpty()) {
+            playerId = "player_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 10000);
+        }
+        
+        // Add player to room
+        room.addPlayer(playerId, playerName);
+        
+        // Store player session info
+        PlayerSessionInfo playerInfo = new PlayerSessionInfo(playerId, playerName, roomCode, false);
+        playerSessions.put(session.getId(), playerInfo);
+        sessionManager.registerSession(session, playerId);
+        
+        // Send ROOM_ASSIGNED to joining player
+        RoomAssignedEvent roomAssigned = new RoomAssignedEvent();
+        roomAssigned.setType("ROOM_ASSIGNED");
+        roomAssigned.setRoomId(roomCode);
+        roomAssigned.setPlayerId(playerId);
+        roomAssigned.setPlayerName(playerName);
+        roomAssigned.setIsHost(room.getHostId() != null && room.getHostId().equals(playerId));
+        sendMessage(session, roomAssigned);
+        
+        // Broadcast PLAYER_JOINED to other players in room
+        PlayerJoinedBroadcast joinedMsg = new PlayerJoinedBroadcast();
+        joinedMsg.setType("PLAYER_JOINED");
+        joinedMsg.setPlayerId(playerId);
+        joinedMsg.setPlayerName(playerName);
+        broadcastToRoom(roomCode, joinedMsg, playerId);
+        
+        // Send room state to joining player
+        sendRoomInfoToPlayer(session, room);
+        
+        logger.info("Player successfully joined room: playerId={}, roomId={}, playerCount={}", 
+                playerId, roomCode, room.getPlayerCount());
     }
 
     private void handleCreateRoom(WebSocketSession session, JsonNode payload) {
@@ -1108,11 +1417,22 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      */
     private void endRound(RoomState room, String reason) {
         String roomId = room.getRoomId();
+        String word = room.getCurrentWord();
+        int roundNumber = room.getCurrentRound();
         
         logger.info("Round ended: roomId={}, round={}, reason={}", 
-                roomId, room.getCurrentRound(), reason);
+                roomId, roundNumber, reason);
+        
+        // Clean up word selection session
+        wordSelectionManager.cleanupSession(roomId);
         
         room.setStatus(RoomStatus.ROUND_OVER);
+        
+        // Broadcast ROUND_ENDED with the word revealed
+        RoundEndedBroadcast roundEnded = RoundEndedBroadcast.create(roomId, reason, word, roundNumber);
+        roundEnded.setLeaderboard(buildLeaderboard(room));
+        roundEnded.setNextRoundInMs(5000);
+        broadcastToRoom(roomId, toJson(roundEnded));
         
         // Check if game should end
         if (room.areAllRoundsCompleted()) {
@@ -1120,14 +1440,20 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         } else if (room.getPlayerCount() < room.getMinPlayers()) {
             endGame(room, "insufficient_players");
         } else {
-            // Prepare for next round
+            // Prepare for next round after delay
             int nextRound = room.getCurrentRound() + 1;
             room.setCurrentRound(nextRound);
             room.resetRound();
-            room.setStatus(RoomStatus.IN_PROGRESS);
             
-            // TODO: Select next drawer and word
-            logger.info("Starting next round: roomId={}, round={}", roomId, nextRound);
+            // Schedule next round word selection
+            scheduler.schedule(() -> {
+                Optional<RoomState> roomOpt = roomManager.getRoom(roomId);
+                if (roomOpt.isPresent() && roomOpt.get().isGameInProgress()) {
+                    selectNextDrawerAndStartWordSelection(roomOpt.get());
+                }
+            }, 5000, TimeUnit.MILLISECONDS);
+            
+            logger.info("Next round scheduled: roomId={}, round={}", roomId, nextRound);
         }
     }
 
@@ -1262,6 +1588,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         playerCorrectGuesses.remove(roomId);
         pendingGameEnds.remove(roomId);
         pendingGameStarts.remove(roomId);
+        
+        // Clean up word selection session
+        wordSelectionManager.cleanupSession(roomId);
         
         // Remove room from manager
         roomManager.removeRoom(roomId);
@@ -1447,6 +1776,50 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
 
     private void handlePing(WebSocketSession session) {
         sendMessage(session, "{\"type\":\"PONG\",\"timestamp\":" + System.currentTimeMillis() + "}");
+    }
+
+    /**
+     * Send current room state to a player.
+     */
+    private void sendRoomInfoToPlayer(WebSocketSession session, RoomState room) {
+        try {
+            StringBuilder players = new StringBuilder("[");
+            boolean first = true;
+            
+            for (Map.Entry<String, String> entry : room.getPlayers().entrySet()) {
+                if (!first) {
+                    players.append(",");
+                }
+                first = false;
+                
+                String playerId = entry.getKey();
+                String playerName = entry.getValue();
+                int score = room.getScore(playerId);
+                
+                players.append(String.format(
+                    "{\"playerId\":\"%s\",\"playerName\":\"%s\",\"score\":%d}",
+                    playerId, playerName, score
+                ));
+            }
+            players.append("]");
+            
+            String roomInfo = String.format(
+                "{\"type\":\"ROOM_INFO\",\"roomId\":\"%s\",\"roomCode\":\"%s\",\"players\":%s,\"maxPlayers\":%d,\"roundsTotal\":%d,\"drawTime\":%d,\"timestamp\":%d}",
+                room.getRoomId(),
+                room.getRoomCode(),
+                players.toString(),
+                room.getMaxPlayers(),
+                room.getTotalRounds(),
+                room.getDrawTime(),
+                System.currentTimeMillis()
+            );
+            
+            sendMessage(session, roomInfo);
+            logger.debug("Sent ROOM_INFO to session: roomId={}", room.getRoomId());
+            
+        } catch (Exception e) {
+            logger.error("Failed to send room info: {}", e.getMessage(), e);
+        }
     }
 
     // ==================== Helper Methods ====================

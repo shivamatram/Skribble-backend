@@ -152,6 +152,13 @@ public class RoomManager {
     public Optional<RoomState> getRoom(String roomId) {
         return Optional.ofNullable(rooms.get(roomId));
     }
+    
+    /**
+     * Get a room by ID (alias for getRoom).
+     */
+    public Optional<RoomState> getRoomById(String roomId) {
+        return getRoom(roomId);
+    }
 
     /**
      * Remove a room.

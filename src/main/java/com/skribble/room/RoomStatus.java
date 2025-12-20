@@ -15,7 +15,20 @@ public enum RoomStatus {
     STARTING,
     
     /**
+     * Drawer is selecting a word. Guessers wait.
+     * Flow: WAITING → WORD_SELECTION → DRAWING → ROUND_OVER
+     */
+    WORD_SELECTION,
+    
+    /**
+     * Game is in progress, drawer is drawing.
+     * Previously called IN_PROGRESS.
+     */
+    DRAWING,
+    
+    /**
      * Game is in progress, rounds are being played.
+     * @deprecated Use DRAWING for clarity. Kept for backwards compatibility.
      */
     IN_PROGRESS,
     
