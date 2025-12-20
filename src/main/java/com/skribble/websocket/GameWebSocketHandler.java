@@ -684,7 +684,13 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         broadcastToRoom(roomId, toJson(playerJoined));
         
         // 3. Broadcast ROOM_STATUS_UPDATE with current player list
-        broadcastRoomStatusUpdate(room);
+        logger.info("QUICK_PLAY: About to broadcast ROOM_STATUS_UPDATE for room {}", roomId);
+        try {
+            broadcastRoomStatusUpdate(room);
+            logger.info("QUICK_PLAY: Successfully broadcast ROOM_STATUS_UPDATE for room {}", roomId);
+        } catch (Exception e) {
+            logger.error("QUICK_PLAY: Failed to broadcast ROOM_STATUS_UPDATE", e);
+        }
         
         // 4. Check if we should start the game
         checkAndScheduleGameStart(room);
