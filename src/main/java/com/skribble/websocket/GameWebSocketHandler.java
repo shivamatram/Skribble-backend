@@ -694,6 +694,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
      * Broadcast current room status to all players in the room.
      */
     private void broadcastRoomStatusUpdate(RoomState room) {
+        logger.debug("Broadcasting ROOM_STATUS_UPDATE for room {} with {} players", 
+                room.getRoomId(), room.getPlayerCount());
         List<RoomStatusUpdateBroadcast.PlayerInfo> players = new ArrayList<>();
         String currentDrawerId = room.getCurrentDrawerId();
         
