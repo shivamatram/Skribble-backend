@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: skribble-backend
+
+# WebSocket Configuration
+websocket:
+  endpoint: /ws/game
+  allowed-origins:
+    - "*"
+  max-session-idle-timeout: 300000
+  max-text-message-buffer-size: 65536
+  max-binary-message-buffer-size: 65536
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.skribble: DEBUG
+    org.springframework.web.socket: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

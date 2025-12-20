@@ -1,0 +1,14 @@
+{
+  "type": "STROKE_BROADCAST",
+  "roomId": "ROOM123",
+  "drawerId": "player_456",
+  "points": [
+    {"x": 100.5, "y": 200.0},
+    {"x": 105.2, "y": 203.5},
+    {"x": 110.8, "y": 208.1},
+    {"x": 118.3, "y": 215.0}
+  ],
+  "color": "#FF5733",
+  "strokeWidth": 5.0,
+  "timestamp": 1734567890123
+}
