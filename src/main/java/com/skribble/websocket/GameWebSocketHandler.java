@@ -3,6 +3,7 @@ package com.skribble.websocket;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.UUID;
 import com.skribble.dto.CorrectGuessBroadcast;
 import com.skribble.dto.DrawStrokeMessage;
 import com.skribble.dto.FinalResultsBroadcast;
