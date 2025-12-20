@@ -36,6 +36,7 @@ public class RoomState {
     
     // Room state
     private volatile RoomStatus status = RoomStatus.WAITING;
+    private volatile String hostId; // The player who created the room
     private volatile String currentDrawerId;
     private volatile String currentWord;
     private volatile boolean gameInProgress;
@@ -62,6 +63,20 @@ public class RoomState {
 
     public String getRoomId() {
         return roomId;
+    }
+    
+    // ==================== Host Management ====================
+    
+    public String getHostId() {
+        return hostId;
+    }
+    
+    public void setHostId(String hostId) {
+        this.hostId = hostId;
+    }
+    
+    public boolean isHost(String playerId) {
+        return hostId != null && hostId.equals(playerId);
     }
     
     // ==================== Lifecycle Timestamps ====================

@@ -7,6 +7,7 @@ import com.skribble.dto.CorrectGuessBroadcast;
 import com.skribble.dto.DrawStrokeMessage;
 import com.skribble.dto.FinalResultsBroadcast;
 import com.skribble.dto.GameEndedBroadcast;
+import com.skribble.dto.GameStartedBroadcast;
 import com.skribble.dto.GameStartingBroadcast;
 import com.skribble.dto.GuessFeedback;
 import com.skribble.dto.LeaderboardUpdateBroadcast;
@@ -1116,8 +1117,30 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         logger.info("Player creating room: sessionId={}, playerName={}, maxPlayers={}", 
                 session.getId(), playerName, maxPlayers);
         
-        // TODO: Implement room creation logic via RoomManager
-        sendMessage(session, createAckMessage("CREATE_ROOM", "Room creation request received"));
+        // Create room via RoomManager
+        RoomState room = roomManager.createRoom(maxPlayers != null ? maxPlayers : 8,
+                                               totalRounds != null ? totalRounds : 3);
+        String roomCode = room.getRoomId();
+        String playerId = generatePlayerId();
+        
+        // Set creator as host
+        room.setHostId(playerId);
+        room.addPlayer(playerId, playerName);
+        
+        // Store player session info
+        PlayerSessionInfo playerInfo = new PlayerSessionInfo(playerId, playerName, roomCode);
+        playerSessions.put(session.getId(), playerInfo);
+        sessionManager.registerSession(session);
+        
+        // Send ROOM_ASSIGNED to creator (with isHost=true)
+        RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(roomCode, playerId, playerName, true);
+        sendMessage(session, toJson(roomAssigned));
+        
+        // Send ROOM_INFO to creator
+        sendRoomInfoToPlayer(session, room);
+        
+        logger.info("Room created successfully: roomId={}, hostId={}, hostName={}", 
+                roomCode, playerId, playerName);
     }
 
     private void handleLeaveRoom(WebSocketSession session, JsonNode payload) {
@@ -1136,8 +1159,55 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private void handleStartGame(WebSocketSession session, JsonNode payload) {
         logger.info("Start game requested: sessionId={}", session.getId());
         
-        // TODO: Verify player is host and room has enough players
-        sendMessage(session, createAckMessage("START_GAME", "Game start request received"));
+        // Get player info
+        PlayerSessionInfo playerInfo = playerSessions.get(session.getId());
+        if (playerInfo == null) {
+            sendError(session, "NOT_IN_ROOM", "You are not in any room");
+            return;
+        }
+        
+        String playerId = playerInfo.playerId();
+        String roomCode = playerInfo.roomCode();
+        RoomState room = roomManager.getRoom(roomCode);
+        
+        if (room == null) {
+            sendError(session, "ROOM_NOT_FOUND", "Room does not exist");
+            return;
+        }
+        
+        // Check if player is the host
+        if (!room.isHost(playerId)) {
+            sendError(session, "NOT_HOST", "Only the host can start the game");
+            return;
+        }
+        
+        // Check if there are at least 2 players
+        if (room.getPlayerCount() < 2) {
+            sendError(session, "NOT_ENOUGH_PLAYERS", "At least 2 players are required to start the game");
+            return;
+        }
+        
+        // Check if game is already in progress
+        if (room.getStatus() == RoomStatus.PLAYING) {
+            sendError(session, "GAME_ALREADY_STARTED", "Game is already in progress");
+            return;
+        }
+        
+        // Start the game
+        room.setStatus(RoomStatus.PLAYING);
+        room.startNewRound();
+        
+        // Broadcast game start to all players in room
+        GameStartedBroadcast gameStartMsg = GameStartedBroadcast.create(
+            roomCode,
+            room.getTotalRounds(),
+            room.getCurrentRound(),
+            room.getCurrentDrawerId()
+        );
+        broadcastToRoom(roomCode, toJson(gameStartMsg));
+        
+        logger.info("Game started: roomId={}, hostId={}, playerCount={}", 
+                roomCode, playerId, room.getPlayerCount());
     }
 
     private void handleDraw(WebSocketSession session, JsonNode payload) {
