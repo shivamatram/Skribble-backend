@@ -1081,12 +1081,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         
         // Store player session info
         PlayerSessionInfo playerInfo = new PlayerSessionInfo(playerId, playerName, roomCode);
-        sessionPlayerMap.put(session.getId(), playerInfo);
-        sessionManager.registerSession(session);
-        
-        // Send ROOM_ASSIGNED to joining player
-        RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(roomCode, playerId, playerName, false);
-        sendMessage(session, toJson(roomAssigned));
+        playerSessions.put(session.getId(), playerInfo);
         
         // Broadcast PLAYER_JOINED to other players in room
         PlayerJoinedBroadcast joinedMsg = PlayerJoinedBroadcast.create(
