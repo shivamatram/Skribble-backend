@@ -1166,14 +1166,15 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             return;
         }
         
-        String playerId = playerInfo.playerId();
-        String roomCode = playerInfo.roomCode();
-        RoomState room = roomManager.getRoom(roomCode);
-        
-        if (room == null) {
+        String playerId = playerInfo.getPlayerId();
+        String roomCode = playerInfo.getRoomCode();
+        Optional<RoomState> roomOpt = roomManager.getRoom(roomCode);
+        if (roomOpt.isEmpty()) {
             sendError(session, "ROOM_NOT_FOUND", "Room does not exist");
             return;
         }
+        
+        RoomState room = roomOpt.get();
         
         // Check if player is the host
         if (!room.isHost(playerId)) {
@@ -1188,14 +1189,15 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         }
         
         // Check if game is already in progress
-        if (room.getStatus() == RoomStatus.PLAYING) {
+        if (room.getStatus() == RoomStatus.DRAWING || room.getStatus() == RoomStatus.IN_PROGRESS) {
             sendError(session, "GAME_ALREADY_STARTED", "Game is already in progress");
             return;
         }
         
         // Start the game
-        room.setStatus(RoomStatus.PLAYING);
-        room.startNewRound();
+        room.setStatus(RoomStatus.WORD_SELECTION);
+        room.setCurrentRound(1);
+        room.setGameInProgress(true);
         
         // Broadcast game start to all players in room
         GameStartedBroadcast gameStartMsg = GameStartedBroadcast.create(
