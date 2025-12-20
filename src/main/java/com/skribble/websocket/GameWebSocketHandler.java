@@ -1117,11 +1117,20 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         logger.info("Player creating room: sessionId={}, playerName={}, maxPlayers={}", 
                 session.getId(), playerName, maxPlayers);
         
+        // Generate unique IDs
+        String roomCode = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+        String playerId = UUID.randomUUID().toString();
+        
         // Create room via RoomManager
-        RoomState room = roomManager.createRoom(maxPlayers != null ? maxPlayers : 8,
-                                               totalRounds != null ? totalRounds : 3);
-        String roomCode = room.getRoomId();
-        String playerId = generatePlayerId();
+        RoomState room = roomManager.createRoom(roomCode);
+        
+        // Configure room settings
+        if (maxPlayers != null) {
+            room.setMaxPlayers(maxPlayers);
+        }
+        if (totalRounds != null) {
+            room.setTotalRounds(totalRounds);
+        }
         
         // Set creator as host
         room.setHostId(playerId);
