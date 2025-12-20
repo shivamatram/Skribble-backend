@@ -1080,25 +1080,20 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         room.addPlayer(playerId, playerName);
         
         // Store player session info
-        PlayerSessionInfo playerInfo = new PlayerSessionInfo(playerId, playerName, roomCode, false);
-        playerSessions.put(session.getId(), playerInfo);
-        sessionManager.registerSession(session, playerId);
+        PlayerSessionInfo playerInfo = new PlayerSessionInfo(playerId, playerName, roomCode);
+        sessionPlayerMap.put(session.getId(), playerInfo);
+        sessionManager.registerSession(session);
         
         // Send ROOM_ASSIGNED to joining player
-        RoomAssignedEvent roomAssigned = new RoomAssignedEvent();
-        roomAssigned.setType("ROOM_ASSIGNED");
-        roomAssigned.setRoomId(roomCode);
-        roomAssigned.setPlayerId(playerId);
-        roomAssigned.setPlayerName(playerName);
-        roomAssigned.setIsHost(room.getHostId() != null && room.getHostId().equals(playerId));
-        sendMessage(session, roomAssigned);
+        RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(roomCode, playerId, playerName, false);
+        sendMessage(session, toJson(roomAssigned));
         
         // Broadcast PLAYER_JOINED to other players in room
-        PlayerJoinedBroadcast joinedMsg = new PlayerJoinedBroadcast();
-        joinedMsg.setType("PLAYER_JOINED");
-        joinedMsg.setPlayerId(playerId);
-        joinedMsg.setPlayerName(playerName);
-        broadcastToRoom(roomCode, joinedMsg, playerId);
+        PlayerJoinedBroadcast joinedMsg = PlayerJoinedBroadcast.create(
+            roomCode, playerId, playerName,
+            room.getPlayerCount(), room.getMaxPlayers()
+        );
+        broadcastToRoomExcept(roomCode, toJson(joinedMsg), playerId);
         
         // Send room state to joining player
         sendRoomInfoToPlayer(session, room);
@@ -1786,15 +1781,14 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             StringBuilder players = new StringBuilder("[");
             boolean first = true;
             
-            for (Map.Entry<String, String> entry : room.getPlayers().entrySet()) {
+            for (String playerId : room.getPlayerIds()) {
                 if (!first) {
                     players.append(",");
                 }
                 first = false;
                 
-                String playerId = entry.getKey();
-                String playerName = entry.getValue();
-                int score = room.getScore(playerId);
+                String playerName = room.getPlayerName(playerId);
+                int score = room.getPlayerScore(playerId);
                 
                 players.append(String.format(
                     "{\"playerId\":\"%s\",\"playerName\":\"%s\",\"score\":%d}",
@@ -1804,13 +1798,12 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             players.append("]");
             
             String roomInfo = String.format(
-                "{\"type\":\"ROOM_INFO\",\"roomId\":\"%s\",\"roomCode\":\"%s\",\"players\":%s,\"maxPlayers\":%d,\"roundsTotal\":%d,\"drawTime\":%d,\"timestamp\":%d}",
+                "{\"type\":\"ROOM_INFO\",\"roomId\":\"%s\",\"players\":%s,\"maxPlayers\":%d,\"roundsTotal\":%d,\"status\":\"%s\",\"timestamp\":%d}",
                 room.getRoomId(),
-                room.getRoomCode(),
                 players.toString(),
                 room.getMaxPlayers(),
                 room.getTotalRounds(),
-                room.getDrawTime(),
+                room.getStatus(),
                 System.currentTimeMillis()
             );
             
