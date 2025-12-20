@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="@dimen/spacing_normal"
+    android:background="?attr/selectableItemBackground"
+    android:minHeight="48dp">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/icon_size_medium"
+        android:layout_height="@dimen/icon_size_medium"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:src="@drawable/ic_email"
+        app:tint="@color/text_secondary"
+        android:contentDescription="Setting Icon" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/text_primary"
+            tools:text="Email Address" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user@example.com"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            tools:text="user@example.com" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_chevron"
+        android:layout_width="@dimen/icon_size_small"
+        android:layout_height="@dimen/icon_size_small"
+        android:src="@drawable/ic_chevron_right"
+        app:tint="@color/text_secondary"
+        android:contentDescription="Navigate" />
+
+</LinearLayout>

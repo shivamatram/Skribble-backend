@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- Google Fonts Certificates for Downloadable Fonts -->
+    <array name="com_google_android_gms_fonts_certs">
+        <item>@array/com_google_android_gms_fonts_certs_dev</item>
+        <item>@array/com_google_android_gms_fonts_certs_prod</item>
+    </array>
+    <string-array name="com_google_android_gms_fonts_certs_dev">
+        <item>
+            MIIEqDCCA5CgAwIBAgIJANWFuGx90071MA0GCSqGSIb3DQEBBAUAMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTAeFw0wODA0MTUyMzM2NTZaFw0zNTA5MDEyMzM2NTZaMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbTCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBANbOLggKv+IxTdGNs8/TGFy0PTP6DHThvbbR24kT9ixcOd9W+EaBPWW+wPPKQmsHxajtWjmQwWfna8mZuSeJS48LIgAZlKkpFeVyxW0qMBujb8X8ETrWy550NaFtI6t9+u7hZeTfHwqNvacKhp1RbE6dBRGWynwMVX8XW8N1+UjFaq6GCJukT4qmpN2afb8sCjUigq0GuMwYXrFVee74bQgLHWGJwPmvmLHC69EH6kWr22ijx4OKXlSIx2xT1AsSHee70w5iDBiK4aph27yH3TxkXy9V89TDdexAcKk/cVHYNnDBapcavl7y0RiQ4biu8ymM8Ga/nmzhRKya6G0cGw8CAQOjgfwwgfkwHQYDVR0OBBYEFI0cxb6VBER2a4/fxGqLmVC+SJH5MIHJBgNVHSMEgcEwgb6AFI0cxb6VBER2a4/fxGqLmVC+SJH5oYGapIGXMIGUMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEQMA4GA1UEChMHQW5kcm9pZDEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDEiMCAGCSqGSIb3DQEJARYTYW5kcm9pZEBhbmRyb2lkLmNvbYIJANWFuGx90071MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBABnTDPEF+3iSP0wNfdIjIz1AlnrPzgAIHVvXxunW7SBrDhEglQZBbKJEk5kT0mtKoOD1JMrSu1xuTKEBahWRbqHsXclaXjoBADb0kkjVEJu/Lh5hgYZnOjvlba8Ld7HCKePCVePoTJBdI4fvugnL8TsgK05aIskyY0hKI9L8KfqfGTl1lzOv2KoWD0KWwtAWPoGChZxmQ+nBli+gwYMzM1vAkP+aayLe0a1EQimlOalO762r0GXO0ks+UeXde2Z4e+8S/pf7pITEI/tP+MxJTALw9QUWEv9lKTk+jkbqxbsh8nfBUapfKqYn0eidpwq2AzVp3juYl7//fKnaPhJD9gs=
+        </item>
+    </string-array>
+    <string-array name="com_google_android_gms_fonts_certs_prod">
+        <item>
+            MIIEQzCCAyugAwIBAgIJAMLgh0ZkSjCNMA0GCSqGSIb3DQEBBAUAMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDAeFw0wODA4MjEyMzEzMzRaFw0zNjAxMDcyMzEzMzRaMHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZDCCASAwDQYJKoZIhvcNAQEBBQADggENADCCAQgCggEBAKtWLgDYO6IIrgqWbxJOKdoR8qtW0I9Y4sypEwPpt1TTcvZApxsdyxMJZ2JORland2qSGT2y5b+3JKkedxiLDmpHpDsz2WCbdxgxRczfey5YZnTJ4VZbH0xqWVW/8lGmPav5xVvn2jgfRkpmK8L3Rq0t8UoAK5VpMVpJxGIzJslIBp8vykH8dE4VAs4QLozi0Y2AHYGaJe1R6louFKChHXaZhP3m+VOS0H5R0BiG3DC0lpHM3YsvjLaUSFM9J3pSFQQLd/FKchMKfFo05IVFg5cgxI6xWJnGDAot5fnG0ljtPPPpMDr36mIbQwPb+ij6wrm7vpsq5R7EfJ21DXsCGwcCAwEAAaOB0TCBzjAdBgNVHQ4EFgQUhMwakjxR6q/MTMqtpCulJMqhdW4wgZ4GA1UdIwSBljCBk4AUhMwakjxR6q/MTMqtpCulJMqhdW6heKR2MHQxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtHb29nbGUgSW5jLjEQMA4GA1UECxMHQW5kcm9pZDEQMA4GA1UEAxMHQW5kcm9pZIIJAMLgh0ZkSjCNMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADggEBADc6l+RXeNpkngTMRV653fVwRLIfs5nBfvVqTrNjMqzMnA5sm7M9fHp3Klm8ZjqMBwSKDLGpqjJNPQhdl5kDACi1ELpJxCf/f/2Idhx2C/OxZFxMIGxhmZBdLehGOc8jAGtfMvqfpmHg/PcpKFDpJPhMmjd7x/PB/M0NxVLSPQpQGf7f/O4PNSzGBdBg7PLXQ4c3QmQO/A1M24/EYyMNDqaYm3f3i/YqDdLF6qLfTe/tD18I/tmlAxHl81qB7m7p3XB/A0nuHNQV3P07WRMvMIsDKT+v4+HhJrPLl1rGl7cKpZLjSNdYdFE83xymFwF5lkdRJ9xryn4PZbMdJNpzBE=
+        </item>
+    </string-array>
+
+    <!-- Default Price Range for Slider -->
+    <array name="default_price_range">
+        <item>0</item>
+        <item>500</item>
+    </array>
+    
+    <!-- Price Range Default Values for Menu Filter -->
+    <array name="price_range_default">
+        <item>0</item>
+        <item>1000</item>
+    </array>
+    
+    <!-- Rating Options -->
+    <string-array name="rating_options">
+        <item>Any Rating</item>
+        <item>3.0★ &amp; above</item>
+        <item>3.5★ &amp; above</item>
+        <item>4.0★ &amp; above</item>
+        <item>4.5★ &amp; above</item>
+    </string-array>
+    
+    <!-- Distance Options -->
+    <string-array name="distance_options">
+        <item>1 km</item>
+        <item>2 km</item>
+        <item>5 km</item>
+        <item>10 km</item>
+        <item>15 km</item>
+        <item>20 km</item>
+    </string-array>
+    
+    <!-- Sort Options -->
+    <string-array name="sort_options">
+        <item>Distance</item>
+        <item>Rating</item>
+        <item>Price</item>
+        <item>Popularity</item>
+        <item>Newest</item>
+        <item>Name</item>
+    </string-array>
+    
+</resources>

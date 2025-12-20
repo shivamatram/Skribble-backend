@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar_bulk_actions"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/primary_color"
+    android:elevation="4dp"
+    app:titleTextColor="@color/white"
+    app:navigationIcon="@drawable/ic_close"
+    app:navigationIconTint="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical|end"
+        android:paddingEnd="@dimen/spacing_normal">
+
+        <TextView
+            android:id="@+id/tv_selected_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0 selected"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_marginStart="@dimen/spacing_normal" />
+
+        <ImageButton
+            android:id="@+id/btn_toggle_availability"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_visibility"
+            android:contentDescription="Toggle Availability"
+            app:tint="@color/white"
+            android:layout_marginEnd="@dimen/spacing_small" />
+
+        <ImageButton
+            android:id="@+id/btn_change_category"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_category"
+            android:contentDescription="Change Category"
+            app:tint="@color/white"
+            android:layout_marginEnd="@dimen/spacing_small" />
+
+        <ImageButton
+            android:id="@+id/btn_price_change"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_edit"
+            android:contentDescription="Change Price"
+            app:tint="@color/white"
+            android:layout_marginEnd="@dimen/spacing_small" />
+
+        <ImageButton
+            android:id="@+id/btn_delete_selected"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="Delete Selected"
+            app:tint="@color/error_color" />
+
+    </LinearLayout>
+
+</com.google.android.material.appbar.MaterialToolbar>

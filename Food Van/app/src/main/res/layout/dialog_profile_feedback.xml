@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Feedback Type Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_feedback_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Feedback Type"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/primary_red"
+        app:hintTextColor="@color/primary_red"
+        app:helperText="e.g., Profile Issue, Feature Request, General Feedback">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_feedback_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1"
+            android:fontFamily="@font/roboto_regular" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Feedback Text Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_feedback_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Your Feedback"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/primary_red"
+        app:hintTextColor="@color/primary_red"
+        app:helperText="Please provide detailed feedback about your profile experience">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_feedback_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:maxLines="6"
+            android:gravity="top|start"
+            android:fontFamily="@font/roboto_regular" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Helper Text -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Your feedback helps us improve the profile experience for all users. Thank you for taking the time to share your thoughts!"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:fontFamily="@font/roboto_regular"
+        android:lineSpacingExtra="2dp" />
+
+</LinearLayout>

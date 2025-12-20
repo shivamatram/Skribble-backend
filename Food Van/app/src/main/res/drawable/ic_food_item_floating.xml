@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="60dp"
+    android:height="60dp"
+    android:viewportWidth="60"
+    android:viewportHeight="60">
+    
+    <!-- Plate -->
+    <path
+        android:pathData="M30,10 C42.43,10 50,17.57 50,30 C50,42.43 42.43,50 30,50 C17.57,50 10,42.43 10,30 C10,17.57 17.57,10 30,10 Z"
+        android:fillColor="@color/white_80" />
+    
+    <!-- Food Item -->
+    <path
+        android:pathData="M30,18 C36.63,18 42,23.37 42,30 C42,36.63 36.63,42 30,42 C23.37,42 18,36.63 18,30 C18,23.37 23.37,18 30,18 Z"
+        android:fillColor="@color/accent_color" />
+    
+    <!-- Garnish -->
+    <path
+        android:pathData="M25,35 C27.21,35 29,36.79 29,39 C29,41.21 27.21,43 25,43 C22.79,43 21,41.21 21,39 C21,36.79 22.79,35 25,35 Z"
+        android:fillColor="@color/success_color" />
+    
+    <path
+        android:pathData="M35,35 C37.21,35 39,36.79 39,39 C39,41.21 37.21,43 35,43 C32.79,43 31,41.21 31,39 C31,36.79 32.79,35 35,35 Z"
+        android:fillColor="@color/success_color" />
+    
+</vector>

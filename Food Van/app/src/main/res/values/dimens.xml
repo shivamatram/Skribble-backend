@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    
+    <!-- Navigation Drawer -->
+    <dimen name="nav_header_height">200dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_status_bar_padding">48dp</dimen>
+    <dimen name="nav_item_height">56dp</dimen>
+    <dimen name="nav_item_padding_horizontal">16dp</dimen>
+    <dimen name="nav_item_padding_vertical">12dp</dimen>
+    <dimen name="nav_item_icon_margin">32dp</dimen>
+    <dimen name="nav_item_text_size">14sp</dimen>
+    <dimen name="nav_group_padding_top">8dp</dimen>
+    <dimen name="nav_group_padding_bottom">8dp</dimen>
+    <dimen name="nav_divider_margin">8dp</dimen>
+    <dimen name="nav_content_top_margin">24dp</dimen>
+    
+    <!-- Card dimensions -->
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_padding">16dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    
+    <!-- Text sizes -->
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+    <dimen name="text_size_normal">14sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_extra_large">24sp</dimen>
+    
+    <!-- Spacing -->
+    <dimen name="spacing_tiny">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_extra_large">32dp</dimen>
+    
+    <!-- Button dimensions -->
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="button_corner_radius">8dp</dimen>
+    
+    <!-- Icon sizes -->
+    <dimen name="icon_size_small">24dp</dimen>
+    <dimen name="icon_size_medium">32dp</dimen>
+    <dimen name="icon_size_large">48dp</dimen>
+    
+    <!-- Dashboard specific -->
+    <dimen name="dashboard_card_height">120dp</dimen>
+    <dimen name="dashboard_quick_action_size">64dp</dimen>
+    
+    <!-- Order card dimensions -->
+    <dimen name="order_card_height">140dp</dimen>
+    <dimen name="order_status_chip_height">32dp</dimen>
+    
+    <!-- Menu item dimensions -->
+    <dimen name="menu_item_image_size">80dp</dimen>
+    <dimen name="menu_item_card_height">120dp</dimen>
+    
+    <!-- Profile dimensions -->
+    <dimen name="profile_image_size">100dp</dimen>
+    <dimen name="cover_image_height">200dp</dimen>
+    
+    <!-- Bottom sheet -->
+    <dimen name="bottom_sheet_peek_height">200dp</dimen>
+    
+    <!-- Toolbar height -->
+    <dimen name="toolbar_height">56dp</dimen>
+    
+    <!-- Tab layout -->
+    <dimen name="tab_height">48dp</dimen>
+    
+    <!-- FAB margin -->
+    <dimen name="fab_margin">16dp</dimen>
+    
+    <!-- Activity Content Spacing -->
+    <dimen name="activity_content_padding">16dp</dimen>
+    <dimen name="activity_content_margin">8dp</dimen>
+    <dimen name="activity_section_spacing">24dp</dimen>
+    <dimen name="activity_item_spacing">16dp</dimen>
+    
+    <!-- List Item Spacing -->
+    <dimen name="list_item_height">72dp</dimen>
+    <dimen name="list_item_padding_horizontal">16dp</dimen>
+    <dimen name="list_item_padding_vertical">12dp</dimen>
+    <dimen name="list_item_icon_size">24dp</dimen>
+    <dimen name="list_item_icon_margin">16dp</dimen>
+    
+    <!-- Consistent Screen Margins -->
+    <dimen name="screen_margin_horizontal">16dp</dimen>
+    <dimen name="screen_margin_vertical">16dp</dimen>
+    <dimen name="content_padding_horizontal">16dp</dimen>
+    <dimen name="content_padding_vertical">8dp</dimen>
+    
+    <!-- Notifications Screen Dimensions -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="status_bar_height_small">16dp</dimen>
+    <dimen name="status_bar_height_large">32dp</dimen>
+    <dimen name="status_nav_gap">8dp</dimen>
+    <dimen name="status_nav_separation">12dp</dimen>
+    
+    <!-- Help & Support Module Dimensions -->
+    <dimen name="screen_padding">16dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="corner_radius_medium">12dp</dimen>
+    <dimen name="corner_radius_small">8dp</dimen>
+    <dimen name="text_size_body">14sp</dimen>
+    
+</resources>

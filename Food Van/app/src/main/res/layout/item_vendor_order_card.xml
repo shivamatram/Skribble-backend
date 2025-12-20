@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_normal"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_normal">
+
+        <!-- Order ID -->
+        <TextView
+            android:id="@+id/tv_order_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#ORD001"
+            android:textSize="@dimen/text_size_small"
+            android:textStyle="bold"
+            android:textColor="@color/text_secondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#ORD001" />
+
+        <!-- Order Status -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pending"
+            android:textColor="@color/white"
+            app:chipBackgroundColor="@color/warning_color"
+            app:chipMinHeight="24dp"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Pending" />
+
+        <!-- Customer Info -->
+        <LinearLayout
+            android:id="@+id/layout_customer_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_call_customer"
+            app:layout_constraintTop_toBottomOf="@id/tv_order_id">
+
+            <ImageView
+                android:layout_width="@dimen/icon_size_small"
+                android:layout_height="@dimen/icon_size_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:src="@drawable/ic_person"
+                app:tint="@color/text_secondary"
+                android:contentDescription="Customer" />
+
+            <TextView
+                android:id="@+id/tv_customer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="John Doe"
+                android:textSize="@dimen/text_size_normal"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                tools:text="John Doe" />
+
+        </LinearLayout>
+
+        <!-- Call Customer Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_call_customer"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Call Customer"
+            app:icon="@drawable/ic_call"
+            app:iconTint="@color/success_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/layout_customer_info"
+            app:layout_constraintBottom_toBottomOf="@id/layout_customer_info" />
+
+        <!-- Time and ETA Info -->
+        <LinearLayout
+            android:id="@+id/layout_time_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_customer_info">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_small"
+                    android:layout_height="@dimen/icon_size_small"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:src="@drawable/ic_access_time"
+                    app:tint="@color/text_secondary"
+                    android:contentDescription="Order Time" />
+
+                <TextView
+                    android:id="@+id/tv_order_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10:30 AM"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_secondary"
+                    tools:text="10:30 AM" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_small"
+                    android:layout_height="@dimen/icon_size_small"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:src="@drawable/ic_schedule"
+                    app:tint="@color/primary_color"
+                    android:contentDescription="ETA" />
+
+                <TextView
+                    android:id="@+id/tv_eta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ETA: 25 mins"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/primary_color"
+                    android:textStyle="bold"
+                    tools:text="ETA: 25 mins" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/gray_300"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_time_info" />
+
+        <!-- Item Summary -->
+        <LinearLayout
+            android:id="@+id/layout_item_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider1">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_item_thumbnail"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_fastfood"
+                app:shapeAppearanceOverlay="@style/RoundedCornerImageView"
+                android:contentDescription="Item Thumbnail" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_item_summary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 items"
+                    android:textSize="@dimen/text_size_normal"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    tools:text="3 items" />
+
+                <TextView
+                    android:id="@+id/tv_item_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Veg Burger, French Fries..."
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_secondary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="Veg Burger, French Fries, Cold Drink" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@color/gray_300"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_item_summary" />
+
+        <!-- Amount and Payment Info -->
+        <LinearLayout
+            android:id="@+id/layout_payment_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/icon_size_small"
+                    android:layout_height="@dimen/icon_size_small"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:src="@drawable/ic_currency_rupee"
+                    app:tint="@color/success_color"
+                    android:contentDescription="Total Amount" />
+
+                <TextView
+                    android:id="@+id/tv_total_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹350"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/success_color"
+                    tools:text="₹350" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/rounded_background_light"
+                android:padding="@dimen/spacing_small">
+
+                <ImageView
+                    android:id="@+id/iv_payment_method"
+                    android:layout_width="@dimen/icon_size_small"
+                    android:layout_height="@dimen/icon_size_small"
+                    android:layout_marginEnd="@dimen/spacing_tiny"
+                    android:src="@drawable/ic_credit_card"
+                    app:tint="@color/primary_color"
+                    android:contentDescription="Payment Method" />
+
+                <TextView
+                    android:id="@+id/tv_payment_method"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UPI"
+                    android:textSize="@dimen/text_size_small"
+                    android:textColor="@color/text_primary"
+                    tools:text="UPI" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:id="@+id/layout_action_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_payment_info">
+
+            <!-- Accept Button (for pending orders) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_accept"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Accept"
+                android:textColor="@color/success_color"
+                app:strokeColor="@color/success_color"
+                app:icon="@drawable/ic_check"
+                app:iconTint="@color/success_color"
+                android:visibility="gone" />
+
+            <!-- Reject Button (for pending orders) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reject"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Reject"
+                android:textColor="@color/error_color"
+                app:strokeColor="@color/error_color"
+                app:icon="@drawable/ic_close"
+                app:iconTint="@color/error_color"
+                android:visibility="gone" />
+
+            <!-- Start Preparing Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_start_preparing"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Start Preparing"
+                app:backgroundTint="@color/primary_color"
+                app:icon="@drawable/ic_restaurant"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <!-- Mark Ready Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_mark_ready"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Mark Ready"
+                app:backgroundTint="@color/accent"
+                app:icon="@drawable/ic_check_circle"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <!-- Mark Delivered Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_mark_delivered"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Mark Delivered"
+                app:backgroundTint="@color/success_color"
+                app:icon="@drawable/ic_delivery_dining"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+
+            <!-- View Details Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_view_details"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Details"
+                android:textColor="@color/primary_color"
+                app:icon="@drawable/ic_arrow_forward"
+                app:iconTint="@color/primary_color" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

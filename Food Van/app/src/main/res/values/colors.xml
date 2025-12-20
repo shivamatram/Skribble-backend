@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Primary Colors -->
+    <color name="primary_color">#FF6B35</color>
+    <color name="primary_dark">#E55A2B</color>
+    <color name="primary_light">#FF8A65</color>
+    <color name="primary_light_10">#1AFF6B35</color>
+    
+    <!-- Secondary Colors -->
+    <color name="secondary_color">#4CAF50</color>
+    <color name="secondary_dark">#388E3C</color>
+    <color name="secondary_light">#81C784</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_color">#FFC107</color>
+    <color name="accent_dark">#FF8F00</color>
+    <color name="accent_light">#FFD54F</color>
+    
+    <!-- Animation Colors -->
+    <color name="primary_red_alpha_20">#33E23744</color>
+    <color name="primary_red_alpha_50">#80E23744</color>
+    <color name="error_color_alpha_20">#33F44336</color>
+    <color name="shimmer_start">#E0E0E0</color>
+    <color name="shimmer_center">#F5F5F5</color>
+    <color name="shimmer_end">#E0E0E0</color>
+    <color name="surface_variant">#F3F3F3</color>
+    <color name="surface_container">#F8F8F8</color>
+    <color name="surface_container_high">#EEEEEE</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    
+    <!-- Menu Management Text Colors -->
+    <color name="darkGray">#4A4A4A</color>
+    <color name="orangeAccent">#FFA500</color>
+    <color name="menu_text_primary">#000000</color>
+    <color name="menu_text_secondary">#4A4A4A</color>
+    
+    <!-- Background Colors -->
+    <color name="background_primary">#FAFAFA</color>
+    <color name="background_secondary">#F5F5F5</color>
+    <color name="background_card">#FFFFFF</color>
+    
+    <!-- Gray Shades -->
+    <color name="gray_25">#FCFCFC</color>
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_900">#212121</color>
+    
+    <!-- Status Colors -->
+    <color name="success_color">#4CAF50</color>
+    <color name="warning_color">#FF9800</color>
+    <color name="warning_light">#FFF3E0</color>
+    <color name="error_color">#F44336</color>
+    <color name="error_light">#FFEBEE</color>
+    <color name="info_color">#2196F3</color>
+    <color name="info_light">#E3F2FD</color>
+    
+    <!-- Transparent Colors -->
+    <color name="black_80">#CC000000</color>
+    <color name="black_60">#99000000</color>
+    
+    <!-- Food Van Specific Colors -->
+    <color name="food_van_orange">#FF6B35</color>
+    <color name="food_van_red">#E74C3C</color>
+    <color name="food_van_green">#27AE60</color>
+    <color name="food_van_yellow">#F39C12</color>
+    
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#FF6B35</color>
+    <color name="gradient_end">#F7931E</color>
+    
+    <!-- Splash Screen Colors -->
+    <color name="primary_color_light">#FF8A65</color>
+    <color name="primary_color_dark">#D84315</color>
+    <color name="accent_color_light">#FFB74D</color>
+    <color name="secondary_color_light">#81C784</color>
+    
+    <!-- Transparency Colors -->
+    <color name="white_90">#E6FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_70">#B3FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="white_40">#66FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="white_85">#D9FFFFFF</color>
+    <color name="white_15">#26FFFFFF</color>
+    <color name="black_30">#4D000000</color>
+    <color name="black_20">#33000000</color>
+    <color name="black_15">#26000000</color>
+    
+    <!-- Filter Specific Colors -->
+    <color name="primary_red">#E74C3C</color>
+    <color name="rating_yellow">#FFC107</color>
+    <color name="gray_light">#E0E0E0</color>
+    
+    <!-- Profile Activity Colors -->
+    <color name="success_green">#4CAF50</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="error_red">#F44336</color>
+    <color name="background_light">#FAFAFA</color>
+    <color name="black_50">#80000000</color>
+
+    <!-- Chip Colors -->
+    <color name="chip_background_color">@color/gray_100</color>
+
+    <!-- Address Activity Colors -->
+    <color name="primary">#FF6B35</color>
+    <color name="success">#4CAF50</color>
+    <color name="success_light">#E8F5E8</color>
+    <color name="error">#F44336</color>
+    <color name="divider_light">#E0E0E0</color>
+    <color name="ripple_color">#1F000000</color>
+
+    <!-- Order History Colors -->
+    <color name="warning">#FF9800</color>
+    <color name="rating_star">#FFC107</color>
+
+    <!-- Material Design 3 Color Tokens -->
+    <color name="surface">#FFFBFE</color>
+    <color name="on_surface">#1C1B1F</color>
+    <color name="on_surface_variant">#49454F</color>
+    <color name="primary_container">#FFDCC2</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_variant">#E55A2B</color>
+    
+    <!-- Dark Mode Support -->
+    <color name="surface_dark">#1C1B1F</color>
+    <color name="on_surface_dark">#E6E1E5</color>
+    <color name="on_surface_variant_dark">#CAC4D0</color>
+    <color name="primary_container_dark">#7D2F00</color>
+
+    <!-- Star Rating Colors -->
+    <color name="star_filled">#FFC107</color>
+    <color name="star_outline">#E0E0E0</color>
+
+    <!-- Enhanced Reviews and Ratings Colors -->
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorOnSuccess">#FFFFFF</color>
+    <color name="colorInfo">#2196F3</color>
+    <color name="colorOnInfo">#FFFFFF</color>
+    <color name="colorWarning">#FF9800</color>
+    <color name="colorOnWarning">#FFFFFF</color>
+    
+    <!-- Material Design 3 Extended Colors -->
+    <color name="colorPrimary">#FF6B35</color>
+    <color name="colorSecondary">#4CAF50</color>
+    <color name="colorTertiary">#FF9800</color>
+    <color name="colorError">#F44336</color>
+    <color name="colorOutline">#79747E</color>
+    <color name="colorOutlineVariant">#CAC4D0</color>
+    
+    <!-- Surface Container Colors -->
+    <color name="colorSurfaceContainer">#F3EDF7</color>
+    <color name="colorSurfaceContainerLow">#F7F2FA</color>
+    <color name="colorSurfaceContainerLowest">#FFFFFF</color>
+    <color name="colorSurfaceContainerHigh">#ECE6F0</color>
+    <color name="colorSurfaceContainerHighest">#E6E0E9</color>
+    <color name="colorSurfaceVariant">#E7E0EC</color>
+    
+    <!-- Rating Distribution Colors -->
+    <color name="rating_5_star">#4CAF50</color>
+    <color name="rating_4_star">#8BC34A</color>
+    <color name="rating_3_star">#FFC107</color>
+    <color name="rating_2_star">#FF9800</color>
+    <color name="rating_1_star">#F44336</color>
+
+    <!-- Missing Material Design 3 Colors -->
+    <color name="colorOnSurfaceVariant">#49454F</color>
+    <color name="colorPrimaryContainer">#FFDCC2</color>
+    <color name="colorOnPrimaryContainer">#2D1600</color>
+    <color name="colorSecondaryContainer">#D7E8D8</color>
+    <color name="colorOnSecondaryContainer">#0F1F13</color>
+    <color name="colorTertiaryContainer">#FFE0B2</color>
+    <color name="colorOnTertiaryContainer">#2E1500</color>
+    <color name="colorErrorContainer">#FFDAD6</color>
+    <color name="colorOnErrorContainer">#410002</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <!-- Red Color Palette -->
+    <color name="red_50">#FFEBEE</color>
+    <color name="red_100">#FFCDD2</color>
+    <color name="red_200">#EF9A9A</color>
+    <color name="red_300">#E57373</color>
+    <color name="red_400">#EF5350</color>
+    <color name="red_500">#F44336</color>
+    <color name="red_600">#E53935</color>
+    <color name="red_700">#D32F2F</color>
+    <color name="red_800">#C62828</color>
+    <color name="red_900">#B71C1C</color>
+
+    <!-- Green Color Palette -->
+    <color name="green_50">#E8F5E8</color>
+    <color name="green_100">#C8E6C9</color>
+    <color name="green_200">#A5D6A7</color>
+    <color name="green_300">#81C784</color>
+    <color name="green_400">#66BB6A</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="green_600">#43A047</color>
+    <color name="green_700">#388E3C</color>
+    <color name="green_800">#2E7D32</color>
+    <color name="green_900">#1B5E20</color>
+
+    <!-- Missing Colors for New Activities -->
+    <color name="accent">#FFC107</color>
+    <color name="surface_container_lowest">#FFFFFF</color>
+    
+    <!-- Navigation Drawer Colors -->
+    <color name="primary_color_alpha">#1A4CAF50</color>
+    <color name="nav_header_background">#4CAF50</color>
+    <color name="nav_item_selected">#E8F5E8</color>
+
+    <!-- Order Status Colors -->
+    <color name="status_pending">#FF9800</color>
+    <color name="status_accepted">#4CAF50</color>
+    <color name="status_preparing">#2196F3</color>
+    <color name="status_ready">#9C27B0</color>
+    <color name="status_delivered">#4CAF50</color>
+    <color name="status_cancelled">#F44336</color>
+
+    <!-- Missing Colors -->
+    <color name="outline_variant">#79747E</color>
+    <color name="transparent">#00000000</color>
+    <color name="surface_container_low">#F7F2FA</color>
+    
+    <!-- Notifications Screen Colors -->
+    <color name="background_color">#FAFAFA</color>
+    <color name="surface_color">#FFFFFF</color>
+    
+    <!-- Help & Support Colors -->
+    <color name="error_color_light">#FFEBEE</color>
+    <color name="category_orders">#2196F3</color>
+    <color name="category_payments">#4CAF50</color>
+    <color name="category_location">#FF9800</color>
+    <color name="category_verification">#9C27B0</color>
+    <color name="category_app">#607D8B</color>
+
+</resources>

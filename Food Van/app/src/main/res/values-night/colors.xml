@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Menu Management Text Colors -->
+    <color name="menu_text_primary">#FFFFFF</color>
+    <color name="menu_text_secondary">#E0E0E0</color>
+    <color name="white">#212121</color>
+    <color name="background_card">#212121</color>
+    
+    <!-- Keep orange accent the same for consistency -->
+    <color name="orangeAccent">#FFA500</color>
+    <color name="darkGray">#E0E0E0</color>
+</resources>

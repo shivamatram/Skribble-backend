@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Restaurant Info -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_restaurant_image"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:cardBackgroundColor="?attr/colorSurfaceContainerHighest"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_restaurant_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Restaurant image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_restaurant"
+                tools:src="@drawable/placeholder_restaurant" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_restaurant_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Restaurant Name"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toStartOf="@id/layout_rating_display"
+            app:layout_constraintStart_toEndOf="@id/card_restaurant_image"
+            app:layout_constraintTop_toTopOf="@id/card_restaurant_image"
+            tools:text="Delicious Food Corner" />
+
+        <TextView
+            android:id="@+id/tv_review_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="2 days ago"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@id/tv_restaurant_name"
+            app:layout_constraintStart_toStartOf="@id/tv_restaurant_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_restaurant_name"
+            tools:text="October 25, 2024" />
+
+        <!-- Rating Display -->
+        <LinearLayout
+            android:id="@+id/layout_rating_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/card_restaurant_image">
+
+            <ImageView
+                android:id="@+id/star_1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="2dp"
+                android:contentDescription="Star rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/star_2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="2dp"
+                android:contentDescription="Star rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/star_3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="2dp"
+                android:contentDescription="Star rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/star_4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="2dp"
+                android:contentDescription="Star rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/star_5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:contentDescription="Star rating"
+                android:src="@drawable/ic_star_outline"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorOutline" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_rating_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="4.0"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/layout_rating_display"
+            app:layout_constraintTop_toBottomOf="@id/layout_rating_display"
+            tools:text="4.5" />
+
+        <!-- Review Content -->
+        <TextView
+            android:id="@+id/tv_review_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_regular"
+            android:lineSpacingExtra="2dp"
+            android:text="Great food and excellent service! The pasta was perfectly cooked and the ambiance was wonderful. Highly recommended for family dinners."
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_restaurant_image"
+            tools:text="Amazing food quality and quick delivery. The biryani was aromatic and flavorful. Will definitely order again!" />
+
+        <!-- Status and Actions -->
+        <LinearLayout
+            android:id="@+id/layout_status_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Review Status -->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_review_status"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Published"
+                android:textSize="12sp"
+                app:chipIcon="@drawable/ic_check_circle"
+                app:chipIconTint="?attr/colorPrimary"
+                app:chipCornerRadius="12dp"
+                app:chipMinHeight="32dp"
+                app:chipBackgroundColor="?attr/colorPrimaryContainer" />
+
+            <!-- Helpful Count -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="Helpful votes"
+                    android:src="@drawable/ic_thumb_up"
+                    android:scaleType="centerInside"
+                    app:tint="?attr/colorSecondary" />
+
+                <TextView
+                    android:id="@+id/tv_helpful_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="12 helpful"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp"
+                    tools:text="8 helpful" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <!-- Action Buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_edit_review"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit"
+                android:textSize="13sp"
+                app:icon="@drawable/ic_edit"
+                app:iconSize="16dp"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_delete_review"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Delete"
+                android:textSize="13sp"
+                app:icon="@drawable/ic_delete"
+                app:iconSize="16dp"
+                app:iconTint="?attr/colorError"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

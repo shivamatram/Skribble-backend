@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="@dimen/spacing_tiny">
+
+    <!-- Star Label -->
+    <TextView
+        android:id="@+id/tv_star_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5★"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textColor="?attr/colorOnSurface"
+        android:fontFamily="@font/roboto_medium"
+        android:minWidth="32dp"
+        android:gravity="center" />
+
+    <!-- Progress Bar -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_rating"
+        android:layout_width="0dp"
+        android:layout_height="8dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        android:progress="75"
+        app:indicatorColor="@color/accent_color"
+        app:trackColor="?attr/colorSurfaceVariant"
+        app:trackCornerRadius="4dp" />
+
+    <!-- Count -->
+    <TextView
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="45"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:minWidth="32dp"
+        android:gravity="center" />
+
+    <!-- Percentage -->
+    <TextView
+        android:id="@+id/tv_percentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="35.4%"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:minWidth="48dp"
+        android:gravity="end"
+        android:layout_marginStart="@dimen/spacing_small" />
+
+</LinearLayout>

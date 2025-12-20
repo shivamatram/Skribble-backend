@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_select_all"
+        android:title="Select All"
+        android:icon="@drawable/ic_select_all"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_delete_selected"
+        android:title="Delete Selected"
+        android:icon="@drawable/ic_delete"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:title="Sort"
+        android:icon="@drawable/ic_sort"
+        app:showAsAction="never">
+        
+        <menu>
+            <item
+                android:id="@+id/sort_by_name"
+                android:title="Sort by Name" />
+            
+            <item
+                android:id="@+id/sort_by_date"
+                android:title="Sort by Date Added" />
+            
+            <item
+                android:id="@+id/sort_by_price"
+                android:title="Sort by Price" />
+            
+            <item
+                android:id="@+id/sort_by_rating"
+                android:title="Sort by Rating" />
+        </menu>
+        
+    </item>
+
+    <item
+        android:id="@+id/action_refresh"
+        android:title="Refresh"
+        android:icon="@drawable/ic_refresh"
+        app:showAsAction="never" />
+
+</menu>

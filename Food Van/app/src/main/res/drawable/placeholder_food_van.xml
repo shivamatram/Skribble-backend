@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="120dp"
+    android:viewportWidth="200"
+    android:viewportHeight="120">
+    
+    <!-- Background -->
+    <path
+        android:pathData="M0,0 L200,0 L200,120 L0,120 Z"
+        android:fillColor="@color/gray_200" />
+    
+    <!-- Food Van -->
+    <path
+        android:pathData="M20,40 L180,40 L180,90 L20,90 Z"
+        android:fillColor="@color/primary_color" />
+    
+    <!-- Windows -->
+    <path
+        android:pathData="M30,50 L80,50 L80,75 L30,75 Z"
+        android:fillColor="@color/white" />
+    
+    <path
+        android:pathData="M90,50 L140,50 L140,75 L90,75 Z"
+        android:fillColor="@color/white" />
+    
+    <!-- Serving Window -->
+    <path
+        android:pathData="M150,55 L170,55 L170,70 L150,70 Z"
+        android:fillColor="@color/accent_color" />
+    
+    <!-- Wheels -->
+    <path
+        android:pathData="M50,90 C55.52,90 60,94.48 60,100 C60,105.52 55.52,110 50,110 C44.48,110 40,105.52 40,100 C40,94.48 44.48,90 50,90 Z"
+        android:fillColor="@color/gray_800" />
+    
+    <path
+        android:pathData="M150,90 C155.52,90 160,94.48 160,100 C160,105.52 155.52,110 150,110 C144.48,110 140,105.52 140,100 C140,94.48 144.48,90 150,90 Z"
+        android:fillColor="@color/gray_800" />
+    
+</vector>

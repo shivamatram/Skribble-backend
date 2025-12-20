@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_review"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:animateLayoutChanges="true"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:rippleColor="?attr/colorOnSurfaceVariant"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeWidth="0dp"
+    android:stateListAnimator="@animator/card_elevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:clipToPadding="false">
+
+        <!-- Enhanced User Profile Image -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="2dp"
+            app:strokeColor="?attr/colorOutlineVariant"
+            app:strokeWidth="2dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_user_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/user_profile_image"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_person_placeholder"
+                app:shapeAppearanceOverlay="@style/CircularImageView" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Enhanced User Name -->
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="12dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="John Doe"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:letterSpacing="-0.01"
+            android:includeFontPadding="false"
+            app:layout_constraintEnd_toStartOf="@id/btn_more_options"
+            app:layout_constraintStart_toEndOf="@id/iv_user_avatar"
+            app:layout_constraintTop_toTopOf="@id/iv_user_avatar" />
+
+        <!-- Enhanced Review Date -->
+        <TextView
+            android:id="@+id/tv_review_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="2 days ago"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp"
+            android:letterSpacing="0.01"
+            app:layout_constraintEnd_toEndOf="@id/tv_user_name"
+            app:layout_constraintStart_toStartOf="@id/tv_user_name"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name" />
+
+        <!-- Enhanced More Options Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_more_options"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:contentDescription="@string/more_options"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_more_vert"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="22dp"
+            app:iconTint="?attr/colorOnSurfaceVariant"
+            app:cornerRadius="22dp"
+            app:rippleColor="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Enhanced Star Rating -->
+        <LinearLayout
+            android:id="@+id/layout_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            android:animateLayoutChanges="true"
+            app:layout_constraintStart_toStartOf="@id/iv_user_avatar"
+            app:layout_constraintTop_toBottomOf="@id/iv_user_avatar">
+
+            <ImageView
+                android:id="@+id/review_star_1"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="3dp"
+                android:contentDescription="@string/star_rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/review_star_2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="3dp"
+                android:contentDescription="@string/star_rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/review_star_3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="3dp"
+                android:contentDescription="@string/star_rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/review_star_4"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginEnd="3dp"
+                android:contentDescription="@string/star_rating"
+                android:src="@drawable/ic_star_filled"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/review_star_5"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:contentDescription="@string/star_rating"
+                android:src="@drawable/ic_star_outline"
+                android:scaleType="centerInside"
+                app:tint="?attr/colorOutline" />
+
+        </LinearLayout>
+
+        <!-- Verified Purchase Badge -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_verified_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:visibility="visible"
+            app:cardBackgroundColor="?attr/colorPrimaryContainer"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/layout_rating"
+            app:layout_constraintStart_toEndOf="@id/layout_rating"
+            app:layout_constraintTop_toTopOf="@id/layout_rating">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:contentDescription="@string/verified_purchase"
+                    android:src="@drawable/ic_verified"
+                    app:tint="?attr/colorOnPrimaryContainer" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Verified Purchase"
+                    android:textColor="?attr/colorOnPrimaryContainer"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Review Text -->
+        <TextView
+            android:id="@+id/tv_review_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/roboto_regular"
+            android:lineSpacingExtra="2dp"
+            android:text="Amazing food and excellent service! The biryani was perfectly cooked and the flavors were incredible. Definitely ordering again soon. Highly recommended!"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/layout_rating"
+            app:layout_constraintTop_toBottomOf="@id/layout_rating" />
+
+        <!-- Review Images (Optional) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_review_images"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_review_text"
+            app:layout_constraintTop_toBottomOf="@id/tv_review_text"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_review_image"
+            tools:visibility="visible" />
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:id="@+id/layout_actions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start|center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_review_text"
+            app:layout_constraintTop_toBottomOf="@id/rv_review_images">
+
+            <!-- Helpful Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_helpful"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Helpful (12)"
+                android:textSize="12sp"
+                app:icon="@drawable/ic_thumb_up"
+                app:iconGravity="start"
+                app:iconSize="16dp"
+                app:iconTint="?attr/colorOnSurfaceVariant" />
+
+            <!-- Reply Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reply"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Reply"
+                android:textSize="12sp"
+                app:icon="@drawable/ic_reply"
+                app:iconGravity="start"
+                app:iconSize="16dp"
+                app:iconTint="?attr/colorOnSurfaceVariant" />
+
+            <!-- Share Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_share"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Share"
+                android:textSize="12sp"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="start"
+                app:iconSize="16dp"
+                app:iconTint="?attr/colorOnSurfaceVariant" />
+
+        </LinearLayout>
+
+        <!-- Vendor Reply Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_vendor_reply"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="?attr/colorSecondaryContainer"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/layout_actions"
+            app:layout_constraintTop_toBottomOf="@id/layout_actions"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- Vendor Reply Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginEnd="6dp"
+                        android:contentDescription="@string/vendor_reply"
+                        android:src="@drawable/ic_store"
+                        app:tint="?attr/colorOnSecondaryContainer" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Response from Vendor"
+                        android:textColor="?attr/colorOnSecondaryContainer"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_reply_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="1 day ago"
+                        android:textColor="?attr/colorOnSecondaryContainer"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <!-- Vendor Reply Text -->
+                <TextView
+                    android:id="@+id/tv_vendor_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Thank you for your wonderful feedback! We're delighted you enjoyed our biryani. Looking forward to serving you again!"
+                    android:textColor="?attr/colorOnSecondaryContainer"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="20dp"
+    android:viewportWidth="20"
+    android:viewportHeight="20">
+    
+    <!-- Food Icon -->
+    <path
+        android:pathData="M10,3 C13.31,3 16,5.69 16,9 C16,12.31 13.31,15 10,15 C6.69,15 4,12.31 4,9 C4,5.69 6.69,3 10,3 Z"
+        android:fillColor="@color/accent_color_light" />
+    
+    <!-- Inner Detail -->
+    <path
+        android:pathData="M10,6 C11.66,6 13,7.34 13,9 C13,10.66 11.66,12 10,12 C8.34,12 7,10.66 7,9 C7,7.34 8.34,6 10,6 Z"
+        android:fillColor="@color/white_50" />
+    
+</vector>

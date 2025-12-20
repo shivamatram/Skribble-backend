@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
+    android:fitsSystemWindows="false"
+    tools:context=".activities.vendor.VendorSettingsActivity">
+
+    <!-- Status Bar Spacer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/primary_color" />
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary_color"
+        android:elevation="@dimen/toolbar_elevation"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:navigationIconTint="@color/white"
+        app:title="Settings"
+        app:titleTextColor="@color/white" />
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
+
+            <!-- Section A: Vendor Account Management -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:paddingHorizontal="20dp">
+
+                <!-- Section Header -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Account Management"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="4dp" />
+
+                <!-- Edit Profile Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_edit_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Profile Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/profile_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_person"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Profile Info -->
+                        <LinearLayout
+                            android:id="@+id/profile_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/profile_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/profile_arrow"
+                            app:layout_constraintStart_toEndOf="@id/profile_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/profile_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Edit Profile"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/tv_vendor_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Update business name, contact info"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/profile_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/profile_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/profile_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Phone Verification Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_phone_verification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Phone Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/phone_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_phone"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Phone Info -->
+                        <LinearLayout
+                            android:id="@+id/phone_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/phone_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/phone_status_chip"
+                            app:layout_constraintStart_toEndOf="@id/phone_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/phone_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Phone Verification"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/tv_vendor_phone"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Verify your phone number"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Status Chip -->
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/phone_status_chip"
+                            style="@style/Widget.Material3.Chip.Assist"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Not Verified"
+                            android:textColor="?attr/colorError"
+                            app:chipBackgroundColor="?attr/colorErrorContainer"
+                            app:chipIcon="@drawable/ic_warning"
+                            app:chipIconTint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/phone_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/phone_icon_container" />
+
+                        <!-- Hidden status text for dynamic updates -->
+                        <TextView
+                            android:id="@+id/tv_phone_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            tools:text="Verified" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+            <!-- Section B: Business & Operations -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
+
+                <!-- Section Header -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Business &amp; Operations"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="4dp" />
+
+                <!-- Business Hours Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_business_hours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Time Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/time_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_schedule"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Business Hours Info -->
+                        <LinearLayout
+                            android:id="@+id/hours_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/time_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/hours_arrow"
+                            app:layout_constraintStart_toEndOf="@id/time_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/time_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Business Hours"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_opening_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="09:00"
+                                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                    android:textColor="?attr/colorOnSurfaceVariant"
+                                    android:fontFamily="@font/roboto_medium" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="8dp"
+                                    android:text="to"
+                                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                    android:textColor="?attr/colorOnSurfaceVariant"
+                                    android:fontFamily="@font/roboto_regular" />
+
+                                <TextView
+                                    android:id="@+id/tv_closing_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="21:00"
+                                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                    android:textColor="?attr/colorOnSurfaceVariant"
+                                    android:fontFamily="@font/roboto_medium" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/hours_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/time_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/time_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <!-- Saved Addresses Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_saved_addresses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Address Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/address_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_location_on"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Address Info -->
+                        <LinearLayout
+                            android:id="@+id/address_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/address_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/address_arrow"
+                            app:layout_constraintStart_toEndOf="@id/address_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/address_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Saved Addresses"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/tv_saved_addresses_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Manage business locations"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/address_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/address_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/address_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Payment & Payout Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_payment_payout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Payment Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/payment_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_payment"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Payment Info -->
+                        <LinearLayout
+                            android:id="@+id/payment_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/payment_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/payment_arrow"
+                            app:layout_constraintStart_toEndOf="@id/payment_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/payment_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Payment &amp; Payout"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/tv_payment_method"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Bank details, UPI, payment methods"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/payment_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/payment_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/payment_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <!-- Location Update Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_location_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Location Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/location_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_my_location"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Location Info -->
+                        <LinearLayout
+                            android:id="@+id/location_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/location_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/location_arrow"
+                            app:layout_constraintStart_toEndOf="@id/location_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/location_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Live Location Update"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/tv_current_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Update your current food van location"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular"
+                                android:maxLines="2"
+                                android:ellipsize="end" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/location_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/location_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/location_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+            <!-- Section C: App Preferences -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
+
+                <!-- Section Header -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="App Preferences"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="4dp" />
+
+                <!-- Notification Settings Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_notification_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Notification Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/notification_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_notifications"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Notification Info -->
+                        <LinearLayout
+                            android:id="@+id/notification_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/notification_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/switch_order_alerts"
+                            app:layout_constraintStart_toEndOf="@id/notification_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/notification_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Order Alerts"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Get notified about new orders"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Switch -->
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switch_order_alerts"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            app:thumbTint="@color/switch_thumb_color"
+                            app:trackTint="@color/switch_track_color"
+                            app:layout_constraintBottom_toBottomOf="@id/notification_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/notification_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </LinearLayout>
+
+            <!-- Section D: Support & Misc -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
+
+                <!-- Section Header -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Support &amp; More"
+                    android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginBottom="16dp"
+                    android:paddingStart="4dp" />
+
+
+                <!-- Reviews & Ratings Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_reviews_ratings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Reviews Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/reviews_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_star_filled"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Reviews Info -->
+                        <LinearLayout
+                            android:id="@+id/reviews_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/reviews_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/reviews_arrow"
+                            app:layout_constraintStart_toEndOf="@id/reviews_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/reviews_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Reviews &amp; Ratings"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="View customer feedback and ratings"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/reviews_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/reviews_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/reviews_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- About App Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_about_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutlineVariant"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- About Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/about_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_info"
+                                app:tint="@color/primary_color" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- About Info -->
+                        <LinearLayout
+                            android:id="@+id/about_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/about_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/about_arrow"
+                            app:layout_constraintStart_toEndOf="@id/about_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/about_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="About App"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnSurface"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:id="@+id/tv_app_version"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Version 1.0.0 • App info &amp; credits"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/about_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="@color/primary_color"
+                            app:layout_constraintBottom_toBottomOf="@id/about_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/about_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Logout Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="?attr/colorErrorContainer"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorError"
+                    app:strokeWidth="1dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <!-- Logout Icon -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/logout_icon_container"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="?attr/colorError"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_logout"
+                                app:tint="?attr/colorOnError" />
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Logout Info -->
+                        <LinearLayout
+                            android:id="@+id/logout_info_layout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@id/logout_icon_container"
+                            app:layout_constraintEnd_toStartOf="@id/logout_arrow"
+                            app:layout_constraintStart_toEndOf="@id/logout_icon_container"
+                            app:layout_constraintTop_toTopOf="@id/logout_icon_container">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Logout"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                                android:textColor="?attr/colorOnErrorContainer"
+                                android:fontFamily="@font/roboto_bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Sign out from your vendor account"
+                                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                                android:textColor="?attr/colorOnErrorContainer"
+                                android:fontFamily="@font/roboto_regular" />
+
+                        </LinearLayout>
+
+                        <!-- Arrow Icon -->
+                        <ImageView
+                            android:id="@+id/logout_arrow"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_forward"
+                            app:tint="?attr/colorOnErrorContainer"
+                            app:layout_constraintBottom_toBottomOf="@id/logout_icon_container"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/logout_icon_container" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

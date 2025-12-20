@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Checked state - faded orange -->
+    <item android:state_checked="true" android:color="#4DFF6B35" />
+    <!-- Unchecked state - very faded gray -->
+    <item android:color="#1A000000" />
+</selector>

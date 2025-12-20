@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <!-- Main Navigation Group -->
+    <group 
+        android:id="@+id/nav_group_main"
+        android:checkableBehavior="single">
+        
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_dashboard"
+            android:title="Dashboard" />
+            
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_shopping_cart"
+            android:title="Orders" />
+            
+        <item
+            android:id="@+id/nav_menu_management"
+            android:icon="@drawable/ic_restaurant_menu"
+            android:title="Menu Management" />
+            
+        <item
+            android:id="@+id/nav_analytics"
+            android:icon="@drawable/ic_analytics"
+            android:title="Analytics" />
+            
+    </group>
+
+    <!-- Settings Group -->
+    <group 
+        android:id="@+id/nav_group_settings"
+        android:checkableBehavior="none">
+            
+        <item
+            android:id="@+id/nav_help_support"
+            android:icon="@drawable/ic_help"
+            android:title="Help &amp; Support" />
+            
+    </group>
+
+    <!-- Account Actions Group -->
+    <group 
+        android:id="@+id/nav_group_account"
+        android:checkableBehavior="none">
+        
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Log Out" />
+            
+    </group>
+
+</menu>

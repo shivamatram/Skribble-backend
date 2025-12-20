@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_flag_review"
+        android:title="Flag Review"
+        android:icon="@drawable/ic_flag" />
+    <item
+        android:id="@+id/action_hide_review"
+        android:title="Hide Review"
+        android:icon="@drawable/ic_visibility_off" />
+</menu>

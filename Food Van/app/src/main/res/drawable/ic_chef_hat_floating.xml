@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="55dp"
+    android:height="55dp"
+    android:viewportWidth="55"
+    android:viewportHeight="55">
+    
+    <!-- Chef Hat Base -->
+    <path
+        android:pathData="M15,35 L40,35 L40,45 L15,45 Z"
+        android:fillColor="@color/white_60" />
+    
+    <!-- Chef Hat Top -->
+    <path
+        android:pathData="M27.5,10 C32.19,10 36,13.81 36,18.5 C36,23.19 32.19,27 27.5,27 C22.81,27 19,23.19 19,18.5 C19,13.81 22.81,10 27.5,10 Z"
+        android:fillColor="@color/white_80" />
+    
+    <!-- Hat Band -->
+    <path
+        android:pathData="M15,35 L40,35 L40,38 L15,38 Z"
+        android:fillColor="@color/primary_color_light" />
+    
+    <!-- Hat Pleats -->
+    <path
+        android:pathData="M22,25 L22,35"
+        android:strokeColor="@color/gray_300"
+        android:strokeWidth="1" />
+    
+    <path
+        android:pathData="M27.5,25 L27.5,35"
+        android:strokeColor="@color/gray_300"
+        android:strokeWidth="1" />
+    
+    <path
+        android:pathData="M33,25 L33,35"
+        android:strokeColor="@color/gray_300"
+        android:strokeWidth="1" />
+    
+</vector>

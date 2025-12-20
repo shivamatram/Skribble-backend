@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_gradient_background"
+    tools:context=".activities.SplashActivity">
+
+    <!-- Animated Background Gradient Overlay -->
+    <View
+        android:id="@+id/background_gradient"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_animated_gradient"
+        android:alpha="0.9" />
+
+    <!-- Floating Background Elements -->
+    <ImageView
+        android:id="@+id/floating_element_1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="40dp"
+        android:alpha="0.3"
+        android:src="@drawable/ic_food_item_floating"
+        android:tint="@color/white_50"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/floating_element_2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="180dp"
+        android:alpha="0.25"
+        android:src="@drawable/ic_delivery_floating"
+        android:tint="@color/white_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/floating_element_3"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="200dp"
+        android:alpha="0.2"
+        android:src="@drawable/ic_chef_hat_floating"
+        android:tint="@color/white_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/floating_element_4"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="160dp"
+        android:alpha="0.15"
+        android:src="@drawable/ic_star_floating"
+        android:tint="@color/white_20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Main Logo Container with Material Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/logo_container"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="40dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="80dp"
+        app:cardElevation="12dp"
+        app:cardMaxElevation="20dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@+id/app_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:strokeColor="@color/primary_color_light"
+        app:strokeWidth="2dp">
+
+        <!-- Logo Icon with Ripple Effect -->
+        <ImageView
+            android:id="@+id/logo_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Food Van Logo"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_food_van_logo_splash"
+            android:tint="@color/primary_color" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- App Title with Material Typography -->
+    <TextView
+        android:id="@+id/app_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.05"
+        android:shadowColor="@color/black_20"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:text="@string/app_name"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_container" />
+
+    <!-- Tagline with Elegant Typography -->
+    <TextView
+        android:id="@+id/tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-light"
+        android:letterSpacing="0.1"
+        android:shadowColor="@color/black_15"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/app_tagline"
+        android:textColor="@color/white_90"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_title" />
+
+    <!-- Modern Progress Indicator -->
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/progress_bar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="0"
+        app:indicatorColor="@color/accent_color"
+        app:layout_constraintBottom_toTopOf="@+id/loading_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:trackColor="@color/white_30"
+        app:trackCornerRadius="4dp"
+        app:trackThickness="6dp" />
+
+    <!-- Loading Text with Animation -->
+    <TextView
+        android:id="@+id/loading_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.15"
+        android:text="@string/loading_text"
+        android:textColor="@color/white_80"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Decorative Elements -->
+    <View
+        android:id="@+id/decorative_line_top"
+        android:layout_width="100dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/decorative_line_gradient"
+        android:alpha="0.6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/decorative_line_bottom"
+        android:layout_width="120dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/decorative_line_gradient"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Subtle Brand Elements -->
+    <ImageView
+        android:id="@+id/brand_accent_1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:alpha="0.3"
+        android:src="@drawable/ic_food_accent"
+        android:tint="@color/accent_color_light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/brand_accent_2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="35dp"
+        android:alpha="0.25"
+        android:src="@drawable/ic_delivery_accent"
+        android:tint="@color/secondary_color_light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Animated Dots Indicator -->
+    <LinearLayout
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagline">
+
+        <View
+            android:id="@+id/dot_1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/animated_dot"
+            android:backgroundTint="@color/accent_color" />
+
+        <View
+            android:id="@+id/dot_2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="6dp"
+            android:background="@drawable/animated_dot"
+            android:backgroundTint="@color/secondary_color" />
+
+        <View
+            android:id="@+id/dot_3"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/animated_dot"
+            android:backgroundTint="@color/primary_color_light" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Customer Settings Screen Strings (Dark Mode) -->
+    <string name="customize_food_van_experience">Customize your Food Van experience</string>
+    
+    <!-- Account & Profile Settings -->
+    <string name="account_profile_settings">Account &amp; Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="manage_personal_information">Manage your personal information</string>
+    <string name="phone_verification">Phone Verification</string>
+    <string name="manage_saved_addresses">Saved Addresses</string>
+    <string name="home_work_other_locations">Home, work &amp; other locations</string>
+    <string name="upi_cards_wallets">UPI, cards &amp; wallets</string>
+    <string name="verified">Verified</string>
+    <string name="not_verified">Not verified</string>
+    
+    <!-- Notification Settings -->
+    <string name="notifications_settings">Notifications</string>
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="confirmed_preparing_delivered">Get updates when order is confirmed, preparing &amp; delivered</string>
+    <string name="promotions_offers">Promotions &amp; Offers</string>
+    <string name="vendors_offers_promotions">Exclusive offers &amp; promotions from vendors</string>
+    <string name="system_alerts">System Alerts</string>
+    <string name="payment_app_updates">Payment failures, app updates &amp; important announcements</string>
+    
+    <!-- Location & Map Settings -->
+    <string name="location_map_settings">Location &amp; Map</string>
+    <string name="use_gps_nearby_vans">Use GPS for nearby vans</string>
+    <string name="find_nearby_vans_location">Find food vans based on your current location</string>
+    <string name="preferred_map_view">Preferred Map View</string>
+    <string name="map_view">Map View</string>
+    <string name="list_view">List View</string>
+    <string name="both_views">Both (Map &amp; List)</string>
+    
+    <!-- Privacy & Data Settings -->
+    <string name="privacy_data_settings">Privacy &amp; Data</string>
+    <string name="share_order_data">Share Order Data with Vendors</string>
+    <string name="analytics_only">For analytics purposes only</string>
+    <string name="personalized_recommendations">Personalized Recommendations</string>
+    <string name="based_on_preferences">Based on your preferences &amp; history</string>
+    <string name="clear_search_history">Clear Search History</string>
+    <string name="clear_recently_viewed">Clear Recently Viewed Items</string>
+    <string name="confirm_clear_search">This action cannot be undone. Clear all search history?</string>
+    <string name="confirm_clear_viewed">This action cannot be undone. Clear all recently viewed items?</string>
+    
+    <!-- Display & Theme Settings -->
+    <string name="display_theme_settings">Display &amp; Theme</string>
+    <string name="system_default">System Default</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="high_contrast_mode">High Contrast Mode</string>
+    <string name="for_better_visibility">For better visibility &amp; accessibility</string>
+    <string name="app_language">App Language</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="marathi">मराठी</string>
+    
+    <!-- Orders & History Preferences -->
+    <string name="orders_history_preferences">Orders &amp; History</string>
+    <string name="default_order_sort">Default Order Sort</string>
+    <string name="newest_first">Newest First</string>
+    <string name="oldest_first">Oldest First</string>
+    <string name="status_based">Status Based</string>
+    <string name="show_suggestions">Show Suggestions</string>
+    <string name="based_on_previous_orders">Based on your previous orders</string>
+    
+    <!-- Help & Legal -->
+    <string name="help_legal">Help &amp; Legal</string>
+    <string name="terms_conditions">Terms &amp; Conditions</string>
+    <string name="about_food_van">About Food Van</string>
+    
+    <!-- Dialog & Confirmation -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="terms_opening_soon">Terms &amp; Conditions screen coming soon</string>
+    <string name="privacy_opening_soon">Privacy Policy screen coming soon</string>
+    <string name="about_opening_soon">About screen coming soon</string>
+    <string name="error_opening_profile">Could not open profile settings</string>
+    <string name="error_opening_verification">Could not open phone verification</string>
+    <string name="error_opening_addresses">Could not open saved addresses</string>
+    <string name="error_opening_payment">Could not open payment methods</string>
+    <string name="error_opening_help">Could not open help &amp; support</string>
+</resources>

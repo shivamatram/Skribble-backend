@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Rounded Image View Style -->
+    <style name="RoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+    
+    <!-- Switch Track Color Selector -->
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+    
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="colorSurface">@color/primary_color</item>
+        <item name="colorOnSurface">@color/white</item>
+    </style>
+</resources>

@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/spacing_small"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    app:strokeColor="?attr/colorOutlineVariant"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/card_padding">
+
+        <!-- Review Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="@dimen/spacing_small">
+
+            <!-- Customer Info -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/roboto_medium"
+                    tools:text="John Doe" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/spacing_tiny">
+
+                    <RatingBar
+                        android:id="@+id/rating_bar_review"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:isIndicator="true"
+                        android:progressTint="@color/accent_color"
+                        android:secondaryProgressTint="@color/accent_light" />
+
+                    <TextView
+                        android:id="@+id/tv_review_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 days ago"
+                        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        tools:text="2 days ago" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Action Menu -->
+            <ImageButton
+                android:id="@+id/btn_review_menu"
+                android:layout_width="@dimen/icon_size_large"
+                android:layout_height="@dimen/icon_size_large"
+                android:src="@drawable/ic_more_vert"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Review options"
+                app:tint="?attr/colorOnSurfaceVariant" />
+
+        </LinearLayout>
+
+        <!-- Order ID (if available) -->
+        <TextView
+            android:id="@+id/tv_order_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order #12345"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/primary_color"
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/spacing_tiny"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Order #12345" />
+
+        <!-- Review Text -->
+        <TextView
+            android:id="@+id/tv_review_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Great food and excellent service! The delivery was quick and the food was still hot. Highly recommend this vendor."
+            android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+            android:textColor="?attr/colorOnSurface"
+            android:lineSpacingExtra="2dp"
+            android:layout_marginBottom="@dimen/spacing_small"
+            tools:text="Great food and excellent service! The delivery was quick and the food was still hot. Highly recommend this vendor." />
+
+        <!-- Expand/Collapse Button (for long reviews) -->
+        <TextView
+            android:id="@+id/tv_expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show more"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="@color/primary_color"
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/spacing_tiny"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <!-- Review Images (if any) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_review_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:listitem="@layout/item_review_image" />
+
+        <!-- Vendor Reply Section -->
+        <LinearLayout
+            android:id="@+id/layout_vendor_reply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="?attr/colorSurfaceVariant"
+            android:padding="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            app:cardCornerRadius="@dimen/corner_radius_small"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <!-- Reply Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/spacing_small">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Vendor Reply"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                    android:textColor="?attr/colorOnSurface"
+                    android:fontFamily="@font/roboto_medium" />
+
+                <TextView
+                    android:id="@+id/tv_reply_edited"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edited"
+                    android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+                <!-- Reply Actions -->
+                <ImageButton
+                    android:id="@+id/btn_edit_reply"
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:src="@drawable/ic_edit"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Edit reply"
+                    app:tint="?attr/colorOnSurfaceVariant"
+                    android:layout_marginStart="@dimen/spacing_small" />
+
+                <ImageButton
+                    android:id="@+id/btn_delete_reply"
+                    android:layout_width="@dimen/icon_size_medium"
+                    android:layout_height="@dimen/icon_size_medium"
+                    android:src="@drawable/ic_delete"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Delete reply"
+                    app:tint="?attr/colorOnSurfaceVariant"
+                    android:layout_marginStart="@dimen/spacing_tiny" />
+
+            </LinearLayout>
+
+            <!-- Reply Text -->
+            <TextView
+                android:id="@+id/tv_reply_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thank you for your feedback! We're glad you enjoyed your meal and our service."
+                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                android:textColor="?attr/colorOnSurface"
+                android:lineSpacingExtra="2dp"
+                android:layout_marginBottom="@dimen/spacing_tiny"
+                tools:text="Thank you for your feedback! We're glad you enjoyed your meal and our service." />
+
+            <!-- Reply Date -->
+            <TextView
+                android:id="@+id/tv_reply_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 day ago"
+                android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                tools:text="1 day ago" />
+
+        </LinearLayout>
+
+        <!-- Reply Composer (shown when replying) -->
+        <LinearLayout
+            android:id="@+id/layout_reply_composer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_reply"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:hint="Write your reply..."
+                app:counterEnabled="true"
+                app:counterMaxLength="1000">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="1000"
+                    android:minLines="3"
+                    android:maxLines="6" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Reply Actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_cancel_reply"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:layout_marginEnd="@dimen/spacing_small" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_send_reply"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send Reply"
+                    android:backgroundTint="@color/primary_color"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Action Buttons (when no reply exists) -->
+        <LinearLayout
+            android:id="@+id/layout_review_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:visibility="visible"
+            tools:visibility="visible">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reply"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reply"
+                android:textColor="@color/primary_color"
+                app:icon="@drawable/ic_reply"
+                app:iconTint="@color/primary_color"
+                app:iconGravity="textStart" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_flag"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flag"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                app:icon="@drawable/ic_flag"
+                app:iconTint="?attr/colorOnSurfaceVariant"
+                app:iconGravity="textStart"
+                android:layout_marginStart="@dimen/spacing_small" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

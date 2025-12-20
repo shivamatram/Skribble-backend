@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:alpha="1.0"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <!-- Menu Item Image -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_menu_item_image"
+            android:layout_width="@dimen/menu_item_image_size"
+            android:layout_height="@dimen/menu_item_image_size"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_fastfood"
+            app:shapeAppearanceOverlay="@style/RoundedCornerImageView"
+            tools:src="@drawable/ic_fastfood" />
+
+        <!-- Menu Item Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Item Name and Status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/spacing_tiny">
+
+                <TextView
+                    android:id="@+id/tv_item_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Veg Burger"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:alpha="1.0"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+                    android:shadowColor="@android:color/transparent"
+                    android:shadowRadius="0"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:paddingBottom="8dp"
+                    tools:text="Delicious Veg Burger" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_item_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textColor="@color/white"
+                    app:chipBackgroundColor="@color/orangeAccent"
+                    app:chipMinHeight="24dp"
+                    android:textSize="12sp"
+                    tools:text="Out of Stock" />
+
+            </LinearLayout>
+
+            <!-- Item Description -->
+            <TextView
+                android:id="@+id/tv_item_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Fresh vegetables with special sauce"
+                android:textSize="14sp"
+                android:textColor="#3A3A3A"
+                android:textStyle="normal"
+                android:alpha="1.0"
+                android:shadowColor="@android:color/transparent"
+                android:shadowRadius="0"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:paddingBottom="8dp"
+                tools:text="Delicious burger made with fresh vegetables and our special sauce" />
+
+            <!-- Price and Category -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="@dimen/spacing_small">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
+                        android:layout_marginEnd="@dimen/spacing_tiny"
+                        android:src="@drawable/ic_currency_rupee"
+                        app:tint="@color/success_color" />
+
+                    <TextView
+                        android:id="@+id/tv_item_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="₹120"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:alpha="1.0"
+                        android:shadowColor="@android:color/transparent"
+                        android:shadowRadius="0"
+                        tools:text="₹120" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_item_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Snacks"
+                    android:textSize="14sp"
+                    android:textColor="#3A3A3A"
+                    android:textStyle="normal"
+                    android:alpha="1.0"
+                    android:shadowColor="@android:color/transparent"
+                    android:shadowRadius="0"
+                    android:background="@drawable/category_background"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    tools:text="Main Course" />
+
+            </LinearLayout>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_toggle_availability"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:text="Disable"
+                    android:textColor="@color/warning_color"
+                    app:icon="@drawable/ic_visibility_off"
+                    app:iconTint="@color/warning_color"
+                    tools:text="Enable" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_edit_item"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:text="Edit"
+                    android:textColor="@color/primary_color"
+                    app:icon="@drawable/ic_edit"
+                    app:iconTint="@color/primary_color" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_delete_item"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:textColor="@color/error_color"
+                    app:icon="@drawable/ic_delete"
+                    app:iconTint="@color/error_color" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="4dp">
+
+    <!-- Received Message Layout -->
+    <LinearLayout
+        android:id="@+id/received_message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="start|top"
+        android:layout_marginEnd="64dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <!-- Sender Avatar -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/sender_avatar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_account_circle"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            tools:src="@drawable/ic_account_circle" />
+
+        <!-- Message Bubble -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="@color/surface_container_low">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:minWidth="80dp"
+                android:maxWidth="280dp">
+
+                <!-- Message Text -->
+                <TextView
+                    android:id="@+id/received_message_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hello! How can I help you today?"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp"
+                    tools:text="Hello! How can I help you today?" />
+
+                <!-- Timestamp -->
+                <TextView
+                    android:id="@+id/received_message_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2:30 PM"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="10sp"
+                    android:layout_gravity="end"
+                    tools:text="2:30 PM" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- Sent Message Layout -->
+    <LinearLayout
+        android:id="@+id/sent_message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end|top"
+        android:layout_marginStart="64dp"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <!-- Message Bubble -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="1dp"
+            app:cardBackgroundColor="@color/primary_color">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:minWidth="80dp"
+                android:maxWidth="280dp">
+
+                <!-- Message Text -->
+                <TextView
+                    android:id="@+id/sent_message_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thank you for your order!"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="4dp"
+                    tools:text="Thank you for your order!" />
+
+                <!-- Timestamp and Status -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="end">
+
+                    <TextView
+                        android:id="@+id/sent_message_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2:31 PM"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:alpha="0.8"
+                        android:layout_marginEnd="4dp"
+                        tools:text="2:31 PM" />
+
+                    <!-- Message Status Icon -->
+                    <ImageView
+                        android:id="@+id/message_status_icon"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/ic_check"
+                        android:alpha="0.8"
+                        app:tint="@color/white"
+                        tools:src="@drawable/ic_check" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <!-- System Message Layout -->
+    <LinearLayout
+        android:id="@+id/system_message_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="8dp"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/system_message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order #12345 has been placed"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:background="@drawable/bg_system_message"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            tools:text="Order #12345 has been placed" />
+
+    </LinearLayout>
+
+</LinearLayout>

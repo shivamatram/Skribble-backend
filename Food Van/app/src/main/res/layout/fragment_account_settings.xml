@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background_primary"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_normal">
+
+        <!-- Profile Header Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:cardBackgroundColor="@color/background_card"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/card_padding"
+                android:gravity="center_vertical">
+
+                <!-- Profile Photo -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    app:cardCornerRadius="40dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/primary_color">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_account_circle"
+                        app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Profile Info -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/vendor_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vendor Name"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_size_large"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="@dimen/spacing_tiny" />
+
+                    <TextView
+                        android:id="@+id/business_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="vendor@example.com"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="@dimen/text_size_normal" />
+
+                </LinearLayout>
+
+                <!-- Edit Photo Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/edit_photo_button"
+                    style="@style/Widget.Material3.Button.IconButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    app:icon="@drawable/ic_edit"
+                    app:iconTint="@color/primary_color"
+                    app:backgroundTint="@color/transparent" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Account Information Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:cardBackgroundColor="@color/background_card"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding">
+
+                <!-- Section Header -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Account Information"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_size_medium"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="@dimen/spacing_normal" />
+
+                <!-- Email Address -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/email_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:hint="Email Address"
+                    app:startIconDrawable="@drawable/ic_email"
+                    app:startIconTint="@color/primary_color"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_edit"
+                    app:endIconTint="@color/text_secondary"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"
+                        tools:text="vendor@example.com" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Business Phone -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/phone_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:hint="Business Phone Number"
+                    app:startIconDrawable="@drawable/ic_phone"
+                    app:startIconTint="@color/primary_color"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_edit"
+                    app:endIconTint="@color/text_secondary"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phone_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        android:enabled="false"
+                        tools:text="+91 9876543210" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Business Name -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/business_name_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:hint="Business Name"
+                    app:startIconDrawable="@drawable/ic_business"
+                    app:startIconTint="@color/primary_color"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_edit"
+                    app:endIconTint="@color/text_secondary"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/business_name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapWords"
+                        android:enabled="false"
+                        tools:text="Food Van Business" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- Business Address -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/address_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Business Address"
+                    app:startIconDrawable="@drawable/ic_location"
+                    app:startIconTint="@color/primary_color"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_edit"
+                    app:endIconTint="@color/text_secondary"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textMultiLine"
+                        android:maxLines="3"
+                        android:enabled="false"
+                        tools:text="123 Main Street, City, State - 123456" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- Danger Zone Section -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_extra_large"
+            app:cardBackgroundColor="@color/background_card"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/error_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/card_padding">
+
+                <!-- Section Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_normal">
+
+                    <ImageView
+                        android:layout_width="@dimen/icon_size_small"
+                        android:layout_height="@dimen/icon_size_small"
+                        android:src="@drawable/ic_warning"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        app:tint="@color/error_color" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Danger Zone"
+                        android:textColor="@color/error_color"
+                        android:textSize="@dimen/text_size_medium"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Deactivate Account -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/deactivate_account_button"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:text="Deactivate Account"
+                    android:textColor="@color/warning_color"
+                    app:strokeColor="@color/warning_color"
+                    app:icon="@drawable/ic_pause"
+                    app:iconTint="@color/warning_color" />
+
+                <!-- Delete Account -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete_account_button"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="Delete Account Permanently"
+                    android:textColor="@color/error_color"
+                    app:strokeColor="@color/error_color"
+                    app:icon="@drawable/ic_delete"
+                    app:iconTint="@color/error_color" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Save Changes Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_changes_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:text="Save Changes"
+            android:textColor="@color/white"
+            android:enabled="false"
+            app:backgroundTint="@color/gray_400"
+            app:cornerRadius="@dimen/button_corner_radius"
+            app:icon="@drawable/ic_save"
+            app:iconTint="@color/white" />
+
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

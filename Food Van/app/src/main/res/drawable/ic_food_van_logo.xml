@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- Background Circle -->
+    <path
+        android:pathData="M60,10 C32.4,10 10,32.4 10,60 C10,87.6 32.4,110 60,110 C87.6,110 110,87.6 110,60 C110,32.4 87.6,10 60,10 Z"
+        android:fillColor="@color/white" />
+    
+    <!-- Food Van Body -->
+    <path
+        android:pathData="M25,45 L95,45 L95,75 L25,75 Z"
+        android:fillColor="@color/primary_color" />
+    
+    <!-- Van Windows -->
+    <path
+        android:pathData="M30,50 L50,50 L50,65 L30,65 Z"
+        android:fillColor="@color/white" />
+    
+    <path
+        android:pathData="M55,50 L75,50 L75,65 L55,65 Z"
+        android:fillColor="@color/white" />
+    
+    <!-- Serving Window -->
+    <path
+        android:pathData="M80,52 L92,52 L92,63 L80,63 Z"
+        android:fillColor="@color/accent_color" />
+    
+    <!-- Wheels -->
+    <path
+        android:pathData="M35,72 C39.42,72 43,75.58 43,80 C43,84.42 39.42,88 35,88 C30.58,88 27,84.42 27,80 C27,75.58 30.58,72 35,72 Z"
+        android:fillColor="@color/gray_800" />
+    
+    <path
+        android:pathData="M85,72 C89.42,72 93,75.58 93,80 C93,84.42 89.42,88 85,88 C80.58,88 77,84.42 77,80 C77,75.58 80.58,72 85,72 Z"
+        android:fillColor="@color/gray_800" />
+    
+    <!-- Food Icon -->
+    <path
+        android:pathData="M60,30 C55,30 52,33 52,38 C52,43 55,46 60,46 C65,46 68,43 68,38 C68,33 65,30 60,30 Z"
+        android:fillColor="@color/accent_color" />
+    
+</vector>

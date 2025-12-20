@@ -1,0 +1,31 @@
+{
+  "rules": {
+    "support": {
+      "faqs": {
+        ".read": true,
+        ".write": "auth != null && auth.token.admin === true"
+      }
+    },
+    "config": {
+      "supportContacts": {
+        ".read": true,
+        ".write": "auth != null && auth.token.admin === true"
+      }
+    },
+    "supportTickets": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$ticketId": {
+        ".validate": "newData.hasChildren(['ticketId', 'customerId', 'category', 'description', 'createdAt', 'updatedAt'])"
+      }
+    },
+    "orders": {
+      ".read": "auth != null && query.orderByChild == 'customerId' && query.equalTo == auth.uid",
+      ".write": "auth != null",
+      "$orderId": {
+        ".read": "auth != null && (data.child('customerId').val() == auth.uid || auth.token.admin === true)",
+        ".write": "auth != null && (newData.child('customerId').val() == auth.uid || auth.token.admin === true)"
+      }
+    }
+  }
+}

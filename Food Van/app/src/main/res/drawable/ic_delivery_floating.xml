@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="45dp"
+    android:height="45dp"
+    android:viewportWidth="45"
+    android:viewportHeight="45">
+    
+    <!-- Delivery Box -->
+    <path
+        android:pathData="M10,15 L35,15 L35,35 L10,35 Z"
+        android:fillColor="@color/white_70"
+        android:strokeColor="@color/primary_color"
+        android:strokeWidth="1" />
+    
+    <!-- Box Lines -->
+    <path
+        android:pathData="M10,25 L35,25"
+        android:strokeColor="@color/primary_color"
+        android:strokeWidth="1" />
+    
+    <path
+        android:pathData="M22.5,15 L22.5,35"
+        android:strokeColor="@color/primary_color"
+        android:strokeWidth="1" />
+    
+    <!-- Speed Lines -->
+    <path
+        android:pathData="M5,20 L8,20"
+        android:strokeColor="@color/accent_color"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+    
+    <path
+        android:pathData="M5,25 L8,25"
+        android:strokeColor="@color/accent_color"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+    
+    <path
+        android:pathData="M5,30 L8,30"
+        android:strokeColor="@color/accent_color"
+        android:strokeWidth="2"
+        android:strokeLineCap="round" />
+    
+</vector>

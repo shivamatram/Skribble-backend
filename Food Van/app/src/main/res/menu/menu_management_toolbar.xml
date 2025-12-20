@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Search, Filter, and Add buttons are in the toolbar layout -->
+    <!-- These menu items are hidden and only used for overflow menu handling -->
+
+    <item
+        android:id="@+id/action_search"
+        android:title="Search"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_filter"
+        android:title="Filter"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sort"
+        android:title="Sort"
+        android:icon="@drawable/ic_sort"
+        app:showAsAction="never"
+        app:iconTint="@color/white" />
+
+    <item
+        android:id="@+id/action_sort_filter"
+        android:title="Sort &amp; Filter"
+        app:showAsAction="never"
+        android:titleCondensed="Sort &amp; Filter" />
+
+    <item
+        android:id="@+id/action_bulk_actions"
+        android:title="Bulk Actions"
+        app:showAsAction="never"
+        android:titleCondensed="Bulk Actions" />
+
+    <item
+        android:id="@+id/action_import_export"
+        android:title="Import / Export"
+        app:showAsAction="never"
+        android:titleCondensed="Import / Export" />
+
+</menu>

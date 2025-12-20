@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
+
+    <!-- Animated Background Elements -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Floating Background Elements -->
+        <ImageView
+            android:id="@+id/floating_element_1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginStart="40dp"
+            android:src="@drawable/ic_chef_hat_floating"
+            android:alpha="0.25"
+            android:tint="@color/white_50" />
+
+        <ImageView
+            android:id="@+id/floating_element_2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="30dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_star_floating"
+            android:alpha="0.3"
+            android:tint="@color/white_70" />
+
+        <ImageView
+            android:id="@+id/floating_element_3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_food_item_floating"
+            android:alpha="0.35"
+            android:tint="@color/white_60" />
+
+        <ImageView
+            android:id="@+id/floating_element_4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginEnd="50dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_delivery_floating"
+            android:alpha="0.4"
+            android:tint="@color/white_80" />
+
+    </FrameLayout>
+
+    <!-- Main Content Scroll View -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center">
+
+            <!-- Enhanced Logo Section with Animation Container -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/logo_container"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="60dp"
+                app:cardElevation="10dp"
+                app:cardBackgroundColor="@color/white_85"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/white">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="18dp">
+
+                    <ImageView
+                        android:id="@+id/logo_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_food_van_logo_splash"
+                        android:contentDescription="Food Van Logo"
+                        android:scaleType="centerInside" />
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Enhanced Title Section -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="28dp">
+
+                <TextView
+                    android:id="@+id/signup_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Create Account"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:shadowColor="@color/black_30"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/signup_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Join the Food Van community today"
+                    android:textSize="16sp"
+                    android:textColor="@color/white_90"
+                    android:shadowColor="@color/black_20"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:gravity="center" />
+
+                <!-- Decorative Line -->
+                <View
+                    android:layout_width="80dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/decorative_line_gradient" />
+
+            </LinearLayout>
+
+            <!-- Enhanced Signup Form with Material Design 3 -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/signup_form_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="14dp"
+                app:cardBackgroundColor="@color/white"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_90"
+                android:layout_marginBottom="24dp">
+
+                <!-- Gradient Header for Form -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:background="@drawable/splash_gradient_background" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="26dp">
+
+                        <!-- Enhanced Name Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/name_input_layout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:hint="Full Name"
+                            app:boxStrokeColor="@color/primary_color"
+                            app:boxStrokeWidth="2dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:hintTextColor="@color/primary_color"
+                            app:startIconDrawable="@drawable/ic_person"
+                            app:startIconTint="@color/primary_color"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="@color/primary_color"
+                            app:helperText="Enter your full name"
+                            app:helperTextTextColor="@color/gray_600">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPersonName"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_primary"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Enhanced Email Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/email_input_layout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:hint="Email Address"
+                            app:boxStrokeColor="@color/primary_color"
+                            app:boxStrokeWidth="2dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:hintTextColor="@color/primary_color"
+                            app:startIconDrawable="@drawable/ic_email"
+                            app:startIconTint="@color/primary_color"
+                            app:endIconMode="clear_text"
+                            app:endIconTint="@color/primary_color"
+                            app:helperText="We'll use this for account verification"
+                            app:helperTextTextColor="@color/gray_600">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_email"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textEmailAddress"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_primary"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Enhanced Phone Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/phone_input_layout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:hint="Phone Number"
+                            app:boxStrokeColor="@color/primary_color"
+                            app:boxStrokeWidth="2dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:hintTextColor="@color/primary_color"
+                            app:startIconDrawable="@drawable/ic_phone"
+                            app:startIconTint="@color/primary_color"
+                            app:helperText="10-digit mobile number"
+                            app:helperTextTextColor="@color/gray_600">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_phone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="phone"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_primary"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Enhanced Password Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/password_input_layout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="18dp"
+                            android:hint="Password"
+                            app:boxStrokeColor="@color/primary_color"
+                            app:boxStrokeWidth="2dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:hintTextColor="@color/primary_color"
+                            app:startIconDrawable="@drawable/ic_lock"
+                            app:startIconTint="@color/primary_color"
+                            app:endIconMode="password_toggle"
+                            app:endIconTint="@color/primary_color"
+                            app:helperText="Minimum 6 characters required"
+                            app:helperTextTextColor="@color/gray_600">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPassword"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_primary"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Enhanced Confirm Password Input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/confirm_password_input_layout"
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:hint="Confirm Password"
+                            app:boxStrokeColor="@color/primary_color"
+                            app:boxStrokeWidth="2dp"
+                            app:boxCornerRadiusTopStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:hintTextColor="@color/primary_color"
+                            app:startIconDrawable="@drawable/ic_lock"
+                            app:startIconTint="@color/primary_color"
+                            app:endIconMode="password_toggle"
+                            app:endIconTint="@color/primary_color"
+                            app:helperText="Re-enter your password"
+                            app:helperTextTextColor="@color/gray_600">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/et_confirm_password"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPassword"
+                                android:textSize="16sp"
+                                android:textColor="@color/text_primary"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Enhanced User Type Selection -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="24dp"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="2dp"
+                            app:cardBackgroundColor="@color/gray_50"
+                            app:strokeWidth="1dp"
+                            app:strokeColor="@color/gray_200">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="I am a:"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/text_primary"
+                                    android:layout_marginBottom="12dp"
+                                    android:drawableStart="@drawable/ic_person"
+                                    android:drawablePadding="8dp"
+                                    android:drawableTint="@color/primary_color" />
+
+                                <RadioGroup
+                                    android:id="@+id/rg_user_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.radiobutton.MaterialRadioButton
+                                        android:id="@+id/rb_customer"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Customer"
+                                        android:textSize="15sp"
+                                        android:textStyle="normal"
+                                        android:checked="true"
+                                        android:buttonTint="@color/primary_color" />
+
+                                    <com.google.android.material.radiobutton.MaterialRadioButton
+                                        android:id="@+id/rb_vendor"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Vendor"
+                                        android:textSize="15sp"
+                                        android:textStyle="normal"
+                                        android:buttonTint="@color/primary_color" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Enhanced Sign Up Button -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_sign_up"
+                            style="@style/Widget.Material3.Button"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:text="CREATE ACCOUNT"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            app:backgroundTint="@color/primary_color"
+                            app:cornerRadius="30dp"
+                            app:elevation="8dp"
+                            app:rippleColor="@color/white_30"
+                            app:strokeWidth="0dp"
+                            android:letterSpacing="0.1"
+                            app:icon="@drawable/ic_person"
+                            app:iconGravity="textStart"
+                            app:iconPadding="8dp"
+                            app:iconTint="@color/white" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Enhanced Progress Indicator -->
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="20dp"
+                app:indicatorColor="@color/white"
+                app:trackColor="@color/white_30"
+                app:indicatorSize="48dp"
+                app:trackThickness="4dp" />
+
+            <!-- Enhanced Login Link Section -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white_15"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white_40">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Already have an account? "
+                        android:textColor="@color/white_90"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Login"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:background="?attr/selectableItemBackground"
+                        android:padding="8dp"
+                        android:drawableEnd="@drawable/ic_arrow_back"
+                        android:drawablePadding="4dp"
+                        android:drawableTint="@color/white" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Decorative Footer Elements -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_chef_hat_floating"
+                    android:alpha="0.6"
+                    android:tint="@color/white_80"
+                    android:layout_marginEnd="12dp" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="2dp"
+                    android:background="@drawable/decorative_line_gradient" />
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_food_item_floating"
+                    android:alpha="0.6"
+                    android:tint="@color/white_80"
+                    android:layout_marginStart="12dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Floating Action Button for Help -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_food_van_logo"
+        app:backgroundTint="@color/secondary_color"
+        app:tint="@color/white"
+        app:elevation="8dp"
+        app:borderWidth="0dp"
+        android:contentDescription="Help" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

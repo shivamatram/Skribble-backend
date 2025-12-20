@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/spacing_normal"
+    android:gravity="end">
+
+    <!-- Selected Count -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/primary_color">
+
+        <TextView
+            android:id="@+id/tv_selected_count_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 selected"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_small" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Toggle Availability FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_toggle_availability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:src="@drawable/ic_visibility"
+        android:contentDescription="Toggle Availability"
+        app:backgroundTint="@color/success_color"
+        app:tint="@color/white"
+        app:fabSize="mini" />
+
+    <!-- Change Category FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_change_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:src="@drawable/ic_category"
+        android:contentDescription="Change Category"
+        app:backgroundTint="@color/primary_color"
+        app:tint="@color/white"
+        app:fabSize="mini" />
+
+    <!-- Change Price FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_change_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:src="@drawable/ic_edit"
+        android:contentDescription="Change Price"
+        app:backgroundTint="@color/warning_color"
+        app:tint="@color/white"
+        app:fabSize="mini" />
+
+    <!-- Delete FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_delete_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:src="@drawable/ic_delete"
+        android:contentDescription="Delete Selected"
+        app:backgroundTint="@color/error_color"
+        app:tint="@color/white"
+        app:fabSize="mini" />
+
+    <!-- Exit Bulk Mode FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_exit_bulk_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close"
+        android:contentDescription="Exit Bulk Mode"
+        app:backgroundTint="@color/surface_variant"
+        app:tint="@color/on_surface_variant"
+        app:fabSize="normal" />
+
+</LinearLayout>

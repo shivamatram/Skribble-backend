@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Required permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <!-- Storage permissions for file export (Android 11+) -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" 
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    
+    <!-- Phone Authentication permissions -->
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.FoodVan"
+        android:enableOnBackInvokedCallback="true">
+
+        <!-- Google Maps API Key (placeholder - replace with real key) -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDsakfrLqaGfznYZqEWRFE8Bnw4eFzQmSY" />
+        <!-- Splash Activity - App Entry Point -->
+        <activity
+            android:name=".activities.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
+            android:hardwareAccelerated="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Login Activity - Primary Entry After Splash -->
+        <activity
+            android:name=".activities.auth.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Signup Activity -->
+        <activity
+            android:name=".activities.auth.SignupActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Main Activity - Optional/Backup Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <!-- Customer Activities -->
+        <activity
+            android:name=".activities.customer.CustomerHomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.CartActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.MenuActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.ItemDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.NotificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.OrderHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.CustomerMapActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.ProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.customer.CustomerProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerHomeActivity" />
+
+        <activity
+            android:name=".activities.customer.CustomerSettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerHomeActivity" />
+
+        <activity
+            android:name=".activities.customer.EditPersonalInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.PhoneVerificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.SavedAddressesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.PaymentMethodsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.OrderDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.FavoriteOrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.ReviewsRatingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.SettingsReviewsRatingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.SettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="My Reviews &amp; Ratings" />
+
+        <activity
+            android:name=".activities.customer.ReviewsRatingsMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.SettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Reviews &amp; Ratings" />
+
+        <activity
+            android:name=".activities.customer.SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.PrivacyPolicyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.SettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="@string/privacy_policy_title" />
+
+        <activity
+            android:name=".activities.customer.CustomerHelpSupportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerHomeActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Help &amp; Support" />
+
+        <activity
+            android:name=".activities.customer.HelpSupportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerHomeActivity"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".activities.customer.HelpSupportMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerHomeActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Help &amp; Support" />
+
+        <activity
+            android:name=".activities.customer.HelpSupportOptionsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerHomeActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Help &amp; Support" />
+
+        <activity
+            android:name=".activities.customer.HelpSupportProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.ProfileActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Help &amp; Support" />
+
+        <activity
+            android:name=".activities.customer.AboutFoodVanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="About Food Van" />
+
+        <activity
+            android:name=".activities.customer.TermsConditionsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.customer.CustomerSettingsActivity"
+            android:label="Terms &amp; Conditions" />
+
+        <!-- Vendor Activities -->
+        <activity
+            android:name=".activities.vendor.VendorDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.vendor.VendorSettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Settings" />
+
+        <activity
+            android:name=".activities.vendor.VendorEditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Edit Profile" />
+
+        <activity
+            android:name=".activities.vendor.VendorProfileEditActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Edit Profile" />
+
+        <activity
+            android:name=".activities.vendor.PhoneVerificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Phone Verification" />
+
+        <activity
+            android:name=".activities.vendor.VendorSavedAddressesActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Save Address" />
+
+        <activity
+            android:name=".activities.vendor.PaymentPayoutActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Payment &amp; Payout" />
+
+        <activity
+            android:name=".activities.vendor.LiveLocationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Live Location Update" />
+
+        <activity
+            android:name=".activities.vendor.HelpSupportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Help &amp; Support" />
+
+        <!-- New Vendor Menu Activities -->
+        <activity
+            android:name=".activities.vendor.VendorNotificationsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Notifications" />
+
+
+        <activity
+            android:name=".activities.vendor.VendorAnalyticsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Analytics" />
+
+        <activity
+            android:name=".activities.vendor.VendorReviewsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorSettingsActivity"
+            android:label="Reviews &amp; Ratings" />
+
+        <!-- Menu Management Activities -->
+        <activity
+            android:name=".activities.vendor.VendorMenuManagementActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Menu Management" />
+
+        <activity
+            android:name=".activities.vendor.ImportExportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorMenuManagementActivity"
+            android:label="Import / Export" />
+
+        <activity
+            android:name=".activities.vendor.AddEditMenuItemActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorMenuManagementActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Add Menu Item" />
+
+        <activity
+            android:name=".activities.vendor.VendorOrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Orders Management" />
+
+        <activity
+            android:name=".activities.vendor.VendorProfileSettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Profile Settings" />
+
+        <!-- New Dashboard Features -->
+        <activity
+            android:name=".activities.vendor.AllOrdersActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="All Orders" />
+
+        <activity
+            android:name=".activities.vendor.EarningDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Earning Details" />
+
+        <!-- Quick Actions Activities -->
+        <activity
+            android:name=".activities.vendor.ManageMenuActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Manage Menu" />
+
+        <activity
+            android:name=".activities.vendor.AddFoodItemActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.ManageMenuActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Add Food Item" />
+
+        <activity
+            android:name=".activities.vendor.CustomerChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:label="Customer Chat" />
+
+        <activity
+            android:name=".activities.vendor.VendorOrderHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Order History" />
+
+        <activity
+            android:name=".activities.vendor.OrderDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Order Details" />
+
+        <activity
+            android:name=".activities.vendor.NotificationsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan.Vendor"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".activities.vendor.VendorDashboardActivity"
+            android:label="Notifications" />
+
+        <!-- Auth Activities -->
+        <activity
+            android:name=".activities.auth.OtpVerificationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.FoodVan"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- FileProvider for sharing exported files -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/surface_container_lowest"
+    app:rippleColor="@color/primary_color_alpha">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Transaction Icon -->
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_currency_rupee"
+            android:background="@drawable/bg_circle_success"
+            android:padding="8dp"
+            android:layout_marginEnd="16dp"
+            app:tint="@color/white" />
+
+        <!-- Transaction Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Order ID -->
+            <TextView
+                android:id="@+id/transaction_order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order #ORD001"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="2dp"
+                tools:text="Order #ORD001" />
+
+            <!-- Date and Payment Method -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/transaction_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today, 2:30 PM"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    tools:text="Today, 2:30 PM" />
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="4dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:background="@drawable/bg_circle_dot"
+                    app:backgroundTint="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/transaction_payment_method"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="UPI"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    tools:text="UPI" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Earning Amount -->
+        <TextView
+            android:id="@+id/transaction_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+ ₹250"
+            android:textColor="@color/success_color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="+ ₹250" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

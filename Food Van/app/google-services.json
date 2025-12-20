@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1048586676431",
+    "firebase_url": "https://food-van-app-default-rtdb.firebaseio.com",
+    "project_id": "food-van-app",
+    "storage_bucket": "food-van-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048586676431:android:0c948fff434df2f794efba",
+        "android_client_info": {
+          "package_name": "com.example.foodvan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048586676431-4bgddhpcnk1qcn5v8p5ekhmeb9ls8id8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.foodvan",
+            "certificate_hash": "3571572287e959eecd3714fce02ed1f8c9e4c399"
+          }
+        },
+        {
+          "client_id": "1048586676431-hnsslupjp0pbrb308m0u8sv365ot092l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDScqfqj_QR5wnznfCyDPNcgiWbnDEW2dQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048586676431-hnsslupjp0pbrb308m0u8sv365ot092l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
