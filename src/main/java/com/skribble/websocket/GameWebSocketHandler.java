@@ -1097,6 +1097,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         );
         broadcastToRoomExcept(roomCode, toJson(joinedMsg), playerId);
         
+        // Broadcast ROOM_STATUS_UPDATE with current player list to all players
+        broadcastRoomStatusUpdate(room);
+        
         // Send room state to joining player
         sendRoomInfoToPlayer(session, room);
         
@@ -1145,6 +1148,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Send ROOM_ASSIGNED to creator (with isHost=true)
         RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(roomCode, playerId, playerName, true);
         sendMessage(session, toJson(roomAssigned));
+        
+        // Broadcast ROOM_STATUS_UPDATE with current player list
+        broadcastRoomStatusUpdate(room);
         
         // Send ROOM_INFO to creator
         sendRoomInfoToPlayer(session, room);
