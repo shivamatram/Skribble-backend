@@ -22,6 +22,9 @@ public class RoomAssignedEvent {
     @JsonProperty("isNewRoom")
     private boolean isNewRoom;
 
+    @JsonProperty("isHost")
+    private boolean isHost;
+
     @JsonProperty("timestamp")
     private long timestamp;
 
@@ -29,12 +32,13 @@ public class RoomAssignedEvent {
         this.timestamp = System.currentTimeMillis();
     }
 
-    public static RoomAssignedEvent create(String roomId, String playerId, String playerName, boolean isNewRoom) {
+    public static RoomAssignedEvent create(String roomId, String playerId, String playerName, boolean isHost) {
         RoomAssignedEvent event = new RoomAssignedEvent();
         event.roomId = roomId;
         event.playerId = playerId;
         event.playerName = playerName;
-        event.isNewRoom = isNewRoom;
+        event.isHost = isHost;
+        event.isNewRoom = isHost; // Keep isNewRoom for backwards compatibility
         return event;
     }
 
@@ -51,6 +55,9 @@ public class RoomAssignedEvent {
 
     public boolean isNewRoom() { return isNewRoom; }
     public void setNewRoom(boolean newRoom) { isNewRoom = newRoom; }
+
+    public boolean isHost() { return isHost; }
+    public void setHost(boolean host) { isHost = host; }
 
     public long getTimestamp() { return timestamp; }
     public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
