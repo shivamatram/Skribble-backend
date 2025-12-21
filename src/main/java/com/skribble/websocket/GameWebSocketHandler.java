@@ -1,9 +1,28 @@
 package com.skribble.websocket;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.UUID;
 import com.skribble.dto.CorrectGuessBroadcast;
 import com.skribble.dto.DrawStrokeMessage;
 import com.skribble.dto.FinalResultsBroadcast;
@@ -23,7 +42,6 @@ import com.skribble.dto.RoundEndedBroadcast;
 import com.skribble.dto.ScoreUpdateBroadcast;
 import com.skribble.dto.SendWordOptionsEvent;
 import com.skribble.dto.StateSyncEvent;
-import com.skribble.dto.StrokeBroadcast;
 import com.skribble.dto.SubmitGuessMessage;
 import com.skribble.dto.WordConfirmedBroadcast;
 import com.skribble.dto.WordSelectedMessage;
@@ -44,25 +62,8 @@ import com.skribble.session.SessionManager;
 import com.skribble.word.WordSelectionManager;
 import com.skribble.word.WordSelectionResult;
 import com.skribble.word.WordSelectionSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import jakarta.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * WebSocket handler for Skribble game messages.
@@ -664,6 +665,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         PlayerSessionInfo sessionInfo = new PlayerSessionInfo(playerId, playerName, roomId);
         playerSessions.put(session.getId(), sessionInfo);
         
+        // Update session metadata for broadcast lookup
+        sessionManager.updateSessionMetadata(session.getId(), playerId, playerName, roomId);
+        
         // 1. Send ROOM_ASSIGNED to the joining player
         RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(
                 roomId,
@@ -1105,6 +1109,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         playerSessions.put(session.getId(), playerInfo);
         sessionManager.registerSession(session);
         
+        // Update session metadata for broadcast lookup
+        sessionManager.updateSessionMetadata(session.getId(), playerId, playerName, roomCode);
+        
         // Send ROOM_ASSIGNED to joining player
         RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(roomCode, playerId, playerName, false);
         sendMessage(session, toJson(roomAssigned));
@@ -1163,6 +1170,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         PlayerSessionInfo playerInfo = new PlayerSessionInfo(playerId, playerName, roomCode);
         playerSessions.put(session.getId(), playerInfo);
         sessionManager.registerSession(session);
+        
+        // Update session metadata for broadcast lookup
+        sessionManager.updateSessionMetadata(session.getId(), playerId, playerName, roomCode);
         
         // Send ROOM_ASSIGNED to creator (with isHost=true)
         RoomAssignedEvent roomAssigned = RoomAssignedEvent.create(roomCode, playerId, playerName, true);
