@@ -650,6 +650,12 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         RoomState room = result.getRoom();
         String roomId = room.getRoomId();
         
+        // If this is a new room, set the creator as host
+        if (result.isNewRoom()) {
+            room.setHostId(playerId);
+            logger.info("QUICK_PLAY: Set hostId for new room: roomId={}, hostId={}", roomId, playerId);
+        }
+        
         // Track metrics
         performanceMonitor.playerJoined();
         if (result.isNewRoom()) {
@@ -1064,15 +1070,18 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private void handleJoinRoom(WebSocketSession session, JsonNode payload) {
         String roomCode = getStringField(payload, "roomCode");
         String playerName = getStringField(payload, "playerName");
-        String playerId = getStringField(payload, "playerId");
+        String clientPlayerId = getStringField(payload, "playerId");
         
         if (roomCode == null || playerName == null) {
             sendError(session, "INVALID_PAYLOAD", "JOIN_ROOM requires 'roomCode' and 'playerName'");
             return;
         }
         
-        logger.info("Player joining room: sessionId={}, roomCode={}, playerName={}, playerId={}", 
-                session.getId(), roomCode, playerName, playerId);
+        // Use sessionId as the authoritative playerId
+        String playerId = session.getId();
+        
+        logger.info("Player joining room: sessionId={}, roomCode={}, playerName={}, clientPlayerId={}, playerId={}", 
+                session.getId(), roomCode, playerName, clientPlayerId, playerId);
         
         // Send ACK immediately
         sendMessage(session, createAckMessage("JOIN_ROOM", "Room join request received"));
@@ -1094,11 +1103,6 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         if (!room.isJoinable()) {
             sendError(session, "ROOM_FULL", "Room is full or not accepting players");
             return;
-        }
-        
-        // Use provided playerId or generate one
-        if (playerId == null || playerId.isEmpty()) {
-            playerId = "player_" + System.currentTimeMillis() + "_" + (int)(Math.random() * 10000);
         }
         
         // Add player to room
@@ -1147,9 +1151,11 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         logger.info("Player creating room: sessionId={}, playerName={}, maxPlayers={}", 
                 session.getId(), playerName, maxPlayers);
         
-        // Generate unique IDs
+        // Generate unique room code
         String roomCode = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
-        String playerId = UUID.randomUUID().toString();
+        
+        // Use sessionId as the authoritative playerId
+        String playerId = session.getId();
         
         // Create room via RoomManager
         RoomState room = roomManager.createRoom(roomCode);
