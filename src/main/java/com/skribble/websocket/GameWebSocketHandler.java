@@ -881,7 +881,13 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 room.getCurrentRound()
         );
         broadcastToRoomExcept(roomId, toJson(selectionStarted), drawerId);
-        
+
+        // Also send WORD_SELECTION_STARTED to the drawer so the client receives a consistent event
+        // that includes the selection timeout (helps UI show overlay immediately)
+        logger.debug("Sending WORD_SELECTION_STARTED to drawer: roomId={}, drawerId={}, sessionIdOpt={}", 
+                roomId, drawerId, sessionManager.findSessionByPlayerId(drawerId).orElse("unknown"));
+        sendToPlayer(drawerId, toJson(selectionStarted));
+
         // Send SEND_WORD_OPTIONS only to the drawer (SECURITY CRITICAL)
         SendWordOptionsEvent wordOptions = SendWordOptionsEvent.create(
                 roomId,
@@ -889,7 +895,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 WordSelectionManager.SELECTION_TIMEOUT_SECONDS
         );
         sendToPlayer(drawerId, toJson(wordOptions));
-        
+
         logger.info("Word selection started: roomId={}, drawerId={}, optionsCount={}", 
                 roomId, drawerId, session.getWordOptions().size());
         
