@@ -495,6 +495,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Update session mappings
         reconnectionManager.updateSessionMapping(session.getId(), playerId);
         sessionManager.registerSession(session);
+        // Update session metadata so sessionManager can lookup by playerId (fix: drawer not receiving SEND_WORD_OPTIONS after reconnect)
+        sessionManager.updateSessionMetadata(session.getId(), playerId, info.getPlayerName(), roomId);
+        logger.debug("Session metadata updated for reconnect: sessionId={}, playerId={}, roomId={}", session.getId(), playerId, roomId);
         
         // Store player session info
         PlayerSessionInfo sessionInfo = new PlayerSessionInfo(playerId, info.getPlayerName(), roomId);
