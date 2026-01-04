@@ -495,6 +495,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Update session mappings
         reconnectionManager.updateSessionMapping(session.getId(), playerId);
         sessionManager.registerSession(session);
+        // Update session metadata so sessionManager can lookup by playerId (fix: drawer not receiving SEND_WORD_OPTIONS after reconnect)
+        sessionManager.updateSessionMetadata(session.getId(), playerId, info.getPlayerName(), roomId);
+        logger.debug("Session metadata updated for reconnect: sessionId={}, playerId={}, roomId={}", session.getId(), playerId, roomId);
         
         // Store player session info
         PlayerSessionInfo sessionInfo = new PlayerSessionInfo(playerId, info.getPlayerName(), roomId);
@@ -821,6 +824,10 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Select first drawer and start word selection
         selectNextDrawerAndStartWordSelection(room);
         
+        // Debug snapshot before broadcasting GAME_STARTED
+        logger.info("Broadcasting GAME_STARTED: roomId={}, status={}, currentDrawerId={}, playersCount={}, playerIds={}", 
+                roomId, room.getStatus(), room.getCurrentDrawerId(), room.getPlayerCount(), room.getPlayerIds());
+
         // Broadcast GAME_STARTED to all players in room, include current drawer id
         GameStartedBroadcast gameStartMsg = GameStartedBroadcast.create(
                 roomId,
@@ -854,8 +861,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         room.setCurrentDrawerId(drawerId);
         room.setStatus(RoomStatus.WORD_SELECTION);
         
-        logger.info("Drawer selected: roomId={}, round={}, drawerId={}, drawerName={}", 
-                roomId, room.getCurrentRound(), drawerId, drawerName);
+        // Debug: log players, drawer index and selected drawerId to help diagnose null drawer cases
+        logger.info("Drawer selected: roomId={}, round={}, drawerIndex={}, drawerId={}, drawerName={}, players={}", 
+                roomId, room.getCurrentRound(), drawerIndex, drawerId, drawerName, players);
         
         // Start word selection phase
         WordSelectionSession session = wordSelectionManager.startWordSelection(
