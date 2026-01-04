@@ -821,7 +821,16 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // Select first drawer and start word selection
         selectNextDrawerAndStartWordSelection(room);
         
-        logger.info("Game started: roomId={}, playerCount={}", roomId, room.getPlayerCount());
+        // Broadcast GAME_STARTED to all players in room, include current drawer id
+        GameStartedBroadcast gameStartMsg = GameStartedBroadcast.create(
+                roomId,
+                room.getTotalRounds(),
+                room.getCurrentRound(),
+                room.getCurrentDrawerId()
+        );
+        broadcastToRoom(roomId, toJson(gameStartMsg));
+        
+        logger.info("Game started: roomId={}, playerCount={}, drawerId={}", roomId, room.getPlayerCount(), room.getCurrentDrawerId());
     }
 
     /**
@@ -1245,21 +1254,10 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             return;
         }
         
-        // Start the game
-        room.setStatus(RoomStatus.WORD_SELECTION);
-        room.setCurrentRound(1);
-        room.setGameInProgress(true);
-        
-        // Broadcast game start to all players in room
-        GameStartedBroadcast gameStartMsg = GameStartedBroadcast.create(
-            roomCode,
-            room.getTotalRounds(),
-            room.getCurrentRound(),
-            room.getCurrentDrawerId()
-        );
-        broadcastToRoom(roomCode, toJson(gameStartMsg));
-        
-        logger.info("Game started: roomId={}, hostId={}, playerCount={}", 
+        // Start the game via central start method which also selects the drawer and begins word selection
+        startGame(room);
+        // startGame handles broadcasting GAME_STARTED, word selection, and status updates
+        logger.info("Start game request processed: roomId={}, hostId={}, playerCount={}", 
                 roomCode, playerId, room.getPlayerCount());
     }
 
