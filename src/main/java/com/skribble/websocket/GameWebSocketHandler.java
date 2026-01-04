@@ -11,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -422,6 +423,11 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 break;
             case "DRAW_STROKE":
                 handleDrawStroke(session, payload);
+                break;
+            case "STROKE_START":
+            case "STROKE_CONTINUE":
+            case "STROKE_END":
+                handleLegacyStroke(session, payload);
                 break;
             case "GUESS":
                 handleGuess(session, payload);
@@ -886,7 +892,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         // that includes the selection timeout (helps UI show overlay immediately)
         logger.debug("Sending WORD_SELECTION_STARTED to drawer: roomId={}, drawerId={}, sessionIdOpt={}", 
                 roomId, drawerId, sessionManager.findSessionByPlayerId(drawerId).orElse("unknown"));
-        sendToPlayer(drawerId, toJson(selectionStarted));
+        // Try to send directly to drawer; retry a few times if session metadata isn't available yet.
+        sendToPlayerWithRetry(drawerId, toJson(selectionStarted), roomId, true);
 
         // Send SEND_WORD_OPTIONS only to the drawer (SECURITY CRITICAL)
         SendWordOptionsEvent wordOptions = SendWordOptionsEvent.create(
@@ -894,7 +901,8 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                 session.getWordOptions(),
                 WordSelectionManager.SELECTION_TIMEOUT_SECONDS
         );
-        sendToPlayer(drawerId, toJson(wordOptions));
+        // Retry sending the sensitive word options privately; do not fallback to broadcast for options
+        sendToPlayerWithRetry(drawerId, toJson(wordOptions), roomId, false);
 
         logger.info("Word selection started: roomId={}, drawerId={}, optionsCount={}", 
                 roomId, drawerId, session.getWordOptions().size());
@@ -1066,6 +1074,44 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         } else {
             logger.warn("Cannot send to player - session not found: playerId={}", playerId);
         }
+    }
+
+    private boolean sendToPlayerIfPresent(String playerId, String message) {
+        Optional<String> sessionIdOpt = sessionManager.findSessionByPlayerId(playerId);
+        if (sessionIdOpt.isPresent()) {
+            return sessionManager.sendToSession(sessionIdOpt.get(), message);
+        }
+        return false;
+    }
+
+    private void sendToPlayerWithRetry(String playerId, String message, String roomId, boolean fallbackToBroadcast) {
+        final int maxAttempts = 3;
+        final long delayMs = 200L;
+        final java.util.concurrent.atomic.AtomicInteger attempts = new java.util.concurrent.atomic.AtomicInteger(0);
+
+        Runnable trySend = new Runnable() {
+            @Override
+            public void run() {
+                int attempt = attempts.incrementAndGet();
+                boolean sent = sendToPlayerIfPresent(playerId, message);
+                if (sent) {
+                    logger.debug("sendToPlayerWithRetry: sent to playerId={} on attempt={}", playerId, attempt);
+                    return;
+                }
+                if (attempt >= maxAttempts) {
+                    logger.warn("sendToPlayerWithRetry: failed to send message to playerId={} after {} attempts", playerId, maxAttempts);
+                    if (fallbackToBroadcast) {
+                        logger.info("Falling back to broadcast (all) for playerId={} to ensure overlay appears", playerId);
+                        broadcastToRoom(roomId, message);
+                    }
+                    return;
+                }
+                scheduler.schedule(this, delayMs, TimeUnit.MILLISECONDS);
+            }
+        };
+
+        // Attempt immediately
+        trySend.run();
     }
 
     /**
@@ -1358,6 +1404,63 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             // Stroke was dropped (stale or room not registered)
             performanceMonitor.messageDropped();
         }
+    }
+
+    /**
+     * Handle legacy per-point stroke messages (STROKE_START/CONTINUE/END) emitted by some clients.
+     * Converts single-point events into batched strokes so they are broadcast like DRAW_STROKE.
+     */
+    private void handleLegacyStroke(WebSocketSession session, JsonNode payload) {
+        String sessionId = session.getId();
+        String roomId = getStringField(payload, "roomId");
+        String playerId = getStringField(payload, "playerId");
+
+        if (roomId == null || playerId == null) {
+            sendError(session, "INVALID_PAYLOAD", "STROKE_* requires: roomId, playerId, x, y");
+            return;
+        }
+
+        Optional<RoomState> roomOpt = roomManager.getRoom(roomId);
+        if (roomOpt.isEmpty()) {
+            sendError(session, "ROOM_NOT_FOUND", "Room does not exist");
+            return;
+        }
+        RoomState room = roomOpt.get();
+
+        // Security validation reuse: check drawer and rate limits
+        SecurityValidator.ValidationResult validation = securityValidator.validateDrawStroke(playerId, room);
+        if (!validation.isValid()) {
+            sendError(session, validation.getErrorCode(), validation.getErrorMessage());
+            handleAbuseCheck(session, playerId);
+            return;
+        }
+
+        double x = payload.has("x") ? payload.get("x").asDouble() : Double.NaN;
+        double y = payload.has("y") ? payload.get("y").asDouble() : Double.NaN;
+        int colorInt = payload.has("color") ? payload.get("color").asInt() : 0xFF000000;
+        String color = String.format("#%08X", colorInt);
+        double strokeWidth = payload.has("strokeWidth") ? payload.get("strokeWidth").asDouble() : 6.0;
+
+        if (Double.isNaN(x) || Double.isNaN(y)) {
+            sendError(session, "INVALID_PAYLOAD", "STROKE_* requires x and y coordinates");
+            return;
+        }
+
+        List<Map<String, Object>> pointMaps = List.of(Map.of("x", x, "y", y));
+
+        StrokeBatcher.StrokeData strokeData = new StrokeBatcher.StrokeData(
+                playerId,
+                pointMaps,
+                color,
+                (float) strokeWidth
+        );
+
+        if (!strokeBatcher.addStroke(roomId, strokeData)) {
+            performanceMonitor.messageDropped();
+        }
+
+        // Update room activity
+        room.updateActivity();
     }
 
     /**
