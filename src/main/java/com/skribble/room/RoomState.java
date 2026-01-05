@@ -19,7 +19,7 @@ public class RoomState {
     public static final int DEFAULT_MAX_PLAYERS = 8;
     public static final int DEFAULT_MIN_PLAYERS = 2;
     public static final int DEFAULT_TOTAL_ROUNDS = 3;
-    public static final long DEFAULT_ROUND_DURATION_MS = 60000;
+    public static final long DEFAULT_ROUND_DURATION_MS = 80000; // 80 seconds (was 60s)
     public static final long GAME_START_DELAY_MS = 5000;
 
     private final String roomId;

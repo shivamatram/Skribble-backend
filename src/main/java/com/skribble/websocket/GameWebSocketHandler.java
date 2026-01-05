@@ -91,6 +91,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private final ConnectionLimiter connectionLimiter;
     private final StrokeBatcher strokeBatcher;
     private final WordSelectionManager wordSelectionManager;
+    private final com.skribble.timer.TimerService timerService;
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
     
     // Track player info associated with each session
@@ -105,6 +106,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     // Track total correct guesses per player across all rounds
     private final Map<String, Map<String, Integer>> playerCorrectGuesses = new ConcurrentHashMap<>();
 
+    // For sanitizing guesses and chat
+    private final com.skribble.util.MessageSanitizer messageSanitizer;
+
     public GameWebSocketHandler(ObjectMapper objectMapper, SessionManager sessionManager, 
                                  RoomManager roomManager, ScoreCalculator scoreCalculator,
                                  ReconnectionManager reconnectionManager,
@@ -113,7 +117,9 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                                  PerformanceMonitor performanceMonitor,
                                  ConnectionLimiter connectionLimiter,
                                  StrokeBatcher strokeBatcher,
-                                 WordSelectionManager wordSelectionManager) {
+                                 WordSelectionManager wordSelectionManager,
+                                 com.skribble.util.MessageSanitizer messageSanitizer,
+                                 com.skribble.timer.TimerService timerService) {
         this.objectMapper = objectMapper;
         this.sessionManager = sessionManager;
         this.roomManager = roomManager;
@@ -126,12 +132,18 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         this.connectionLimiter = connectionLimiter;
         this.strokeBatcher = strokeBatcher;
         this.wordSelectionManager = wordSelectionManager;
+        this.messageSanitizer = messageSanitizer;
+        this.timerService = timerService;
     }
 
     @PostConstruct
     public void init() {
         // Set up callback for when reconnection window expires
         reconnectionManager.setOnReconnectExpired(this::handleReconnectionExpired);
+        // Hook up timer service broadcasting -> use our broadcast helper so timer ticks go to the room
+        timerService.setBroadcastCallback((roomId, json) -> {
+            broadcastToRoom(roomId, json);
+        });
     }
 
     @Override
@@ -907,6 +919,13 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         logger.info("Word selection started: roomId={}, drawerId={}, optionsCount={}", 
                 roomId, drawerId, session.getWordOptions().size());
         
+        // Start word selection timer ticks for UI (no timeout action here; manager handles actual selection timeout)
+        try {
+            timerService.startWordSelectionTimer(roomId, () -> {});
+        } catch (Exception ex) {
+            logger.warn("Failed to start word selection timer for UI ticks: roomId={}, error={}", roomId, ex.getMessage());
+        }
+        
         // Broadcast room status update
         broadcastRoomStatusUpdate(room);
     }
@@ -1014,6 +1033,19 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         room.setCurrentWord(selectedWord);
         room.setStatus(RoomStatus.DRAWING);
         room.startRound(room.getRoundDurationMs());
+
+        // Start round timer ticks for UI and schedule endRound on timeout
+        try {
+            timerService.startRoundTimer(roomId, (int) (room.getRoundDurationMs() / 1000), () -> {
+                Optional<RoomState> rOpt = roomManager.getRoom(roomId);
+                rOpt.ifPresent(r -> {
+                    // schedule endRound on our scheduler to avoid threading issues
+                    scheduler.execute(() -> endRound(r, "time_expired"));
+                });
+            });
+        } catch (Exception ex) {
+            logger.warn("Failed to start round timer for UI ticks: roomId={}, error={}", roomId, ex.getMessage());
+        }
         
         // Create word hint for guessers (e.g., "_ _ _ _ _")
         String wordHint = createWordHint(selectedWord);
@@ -1541,6 +1573,18 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         String normalizedWord = room.getNormalizedCurrentWord();
         boolean isCorrect = normalizedGuess.equals(normalizedWord);
 
+        // Sanitize guess for public display and decide whether it's safe to broadcast
+        String sanitizedGuess = messageSanitizer.sanitizeGuess(guessMessage.getGuess());
+        boolean containsSecret = messageSanitizer.containsSecretWord(sanitizedGuess, room.getCurrentWord());
+        boolean close = messageSanitizer.isCloseGuess(sanitizedGuess, room.getCurrentWord());
+
+        // If the guess contains the secret word, hide the text in public broadcast to avoid leaks
+        String publicGuess = (containsSecret || sanitizedGuess == null) ? "" : sanitizedGuess;
+
+        // Broadcast the guess to the room so it appears in the guesses/chat area (sanitized / hidden as necessary)
+        BroadcastGuessMessage guessBroadcast = new BroadcastGuessMessage(playerId, publicGuess, isCorrect, close && !containsSecret);
+        broadcastToRoom(roomId, toJson(guessBroadcast));
+
         if (isCorrect) {
             handleCorrectGuess(session, room, playerId, roomId);
         } else {
@@ -1661,6 +1705,14 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         
         room.setStatus(RoomStatus.ROUND_OVER);
         
+        // Stop any active timers for this room
+        try {
+            timerService.stopRoundTimer(roomId);
+            timerService.stopWordSelectionTimer(roomId);
+        } catch (Exception ex) {
+            logger.warn("Failed to stop timers for room end: roomId={}, error={}", roomId, ex.getMessage());
+        }
+
         // Broadcast ROUND_ENDED with the word revealed
         RoundEndedBroadcast roundEnded = RoundEndedBroadcast.create(roomId, reason, word, roundNumber);
         roundEnded.setLeaderboard(buildLeaderboard(room));
